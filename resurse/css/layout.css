@@ -1,0 +1,137 @@
+body {
+    /* --culoare1: #17252a;
+    --culoare2: #2b7a78;
+    --culoare3: #3aafa9;
+    --culoare4: #def2f1;
+    --culoare5: #feffff; */
+    /* --culoare1: rgb(23, 37, 42);
+    --culoare2: rgb(43, 122, 120);
+    --culoare3: rgb(58, 175, 169);
+    --culoare4: rgb(222, 242, 241);
+    --culoare5: rgb(254, 255, 255); */
+    --culoare-umbra: rgb(0 0 0 / 0.3);
+}
+
+#grid-pagina {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+        "zona1 zona1 zona1 zona1"
+        "zona2 zona2 zona3 zona3"
+        "zona2 zona2 zona4 zona4"
+        "zona5 zona6 zona6 zona7"
+        "trending-now trending-now pareri pareri"
+        "prezentare prezentare faq faq"
+        "galerie-statica galerie-statica galerie-statica galerie-statica"
+        "galerie-animata galerie-animata galerie-animata galerie-animata";
+}
+
+#grid-pagina > * {
+    border: 2px solid var(--culoare2);
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px var(--culoare-umbra);
+    padding: 1em; /*1 em = 1 unitate font*/
+}
+
+/* astea sunt alias-uri */
+#welcome {
+    grid-area: zona1;
+}
+
+#tabel {
+    grid-area: zona2;
+}
+#calendar-evenimente {
+    grid-area: zona3;
+}
+#anunturi {
+    grid-area: zona4;
+}
+#lista-utilizatori-online {
+    grid-area: zona5;
+}
+#date-utilizatori {
+    grid-area: zona6;
+}
+#date-site-server {
+    grid-area: zona7;
+}
+#trending-now {
+    grid-area: trending-now;
+}
+#parerile-clientilor {
+    grid-area: pareri;
+}
+#prezentare-produse {
+    grid-area: prezentare;
+}
+#faq {
+    grid-area: faq;
+}
+
+.intro-livrare {
+    font-size: 1.5rem;
+}
+#galerie-statica {
+    grid-area: galerie-statica;
+}
+#galerie-animata {
+    grid-area: galerie-animata;
+}
+/*@media trb pus ultimul ca sa suprascrie css-ul general*/
+
+@media screen and (max-width: 1200px) {
+    html {
+        font-size: 15px;
+    }
+    #grid-pagina {
+        grid-template-columns: repeat(2, 1fr) /*1fr 1fr 1fr*/;
+        gap: 10px;
+        grid-template-areas:
+            "zona1 zona1"
+            "zona2 zona3"
+            "zona4 zona5"
+            "zona6 zona7"
+            "trending-now pareri"
+            "prezentare faq"
+            "galerie-statica galerie-statica";
+    }
+    #galerie-animata {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    html {
+        font-size: 12px;
+    }
+    #grid-pagina {
+        display: block;
+    }
+    #grid-pagina > * {
+        margin: 5px;
+    }
+    #galerie-animata {
+        display: none;
+    }
+}
+
+#header {
+    color: var(--culoare4);
+    background-color: var(--culoare2);
+    border: 2px solid var(--culoare2);
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px var(--culoare-umbra);
+    margin-bottom: 10px;
+    padding: 1em;
+}
+
+#footer {
+    background-color: var(--culoare4);
+    border: 2px solid var(--culoare2);
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px var(--culoare-umbra);
+    margin-top: 10px;
+    padding: 1em;
+}

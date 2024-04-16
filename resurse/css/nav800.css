@@ -1,0 +1,101 @@
+/*facem vizibil iconul de hamburger meniu*/
+
+#hamburger {
+    display: block;
+}
+
+#hamburger > img {
+    height: var(--inaltime-meniu);
+    min-width: 5%;
+    width: 5%;
+    display: block;
+}
+/* implicit meniul e ascuns*/
+ul.meniu {
+    display: none;
+    position: absolute;
+    width: 100%;
+}
+
+.meniu li:hover {
+    box-shadow: 0px 0px 15px 1px var(--culoare-umbra) inset;
+    transition: box-shadow 0.5s linear;
+}
+
+/*aici facem vizibil meniul cand facem click pe hamburger meniu*/
+#ch-menu:checked + ul.meniu {
+    display: block;
+    z-index: 2;
+    position: relative;
+
+    /* animation-name: aparitie_meniu_p;
+    animation-iteration-count: 1;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear; */
+
+    transform-origin: top left;
+    animation: aparitie_meniu_p 1s linear 1 forwards;
+}
+
+/* pt taskul bonus  */
+
+#ch-menu:checked + ul.meniu > li > div,
+#ch-menu:checked + ul.meniu > li > a {
+    z-index: 2;
+    position: relative;
+    transform-origin: 50% 50%;
+    animation-name: aparitie_meniu_p_btn;
+    animation-iteration-count: 1;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+/*optiunile se intind pe toata latimea containerului*/
+nav ul.meniu li {
+    width: 100%;
+}
+
+/*meniul sa vina deasupra continutul de mai jos, fara sa impinga continutul*/
+nav ul.meniu > li ul {
+    position: absolute;
+    width: 100%;
+    z-index: 200;
+    transform: scale(1, 1) !important;
+    opacity: 1 !important;
+}
+
+#ch-menu:checked + ul.meniu > li ul > * {
+    position: relative;
+    z-index: 200;
+}
+nav ul.meniu > li:hover > ul {
+    z-index: 200;
+    animation: none;
+}
+
+/* pentru fiecare element din submeniu generam un triunghiulet alb inaintea lui*/
+/* nav ul.meniu > li li a:before {
+    content: " \25B7\00A0	";
+    color: white;
+} */
+
+@keyframes aparitie_meniu_p {
+    0% {
+        /* opacity: 0; */
+        transform: scale(0, 0);
+    }
+    100% {
+        /* opacity: 1; */
+        transform: scale(1, 1);
+    }
+}
+
+@keyframes aparitie_meniu_p_btn {
+    0% {
+        transform: scale(0, 0);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}

@@ -1,0 +1,82 @@
+{
+    "grup_ingrediente":[
+        {
+            "tip":"blat",
+            "nume_ingrediente":[
+                "faina","unt","lapte","zahar","cacao"
+            ]
+
+        },
+        {
+            "tip":"crema",
+            "nume_ingrediente":[
+                "faina","unt","nuci","vanilie","lapte","zahar","cacao"
+            ]
+
+        },
+        {
+            "tip":"decor",
+            "nume_ingrediente":[
+                "capsuni","frisca","frunze de ciocolata","nuci","alune"
+            ]
+
+        }
+    ],
+    "ingrediente":{
+        "faina":{
+            "cantitate":100,
+            "unitate":"g",
+            "calorii":364
+        },
+        "unt":{
+            "cantitate":10,
+            "unitate":"g",
+            "calorii":71.7
+        },        
+        "lapte":{
+            "cantitate":100,
+            "unitate":"ml",
+            "calorii":42
+        },
+        "zahar":{
+            "cantitate":100,
+            "unitate":"g",
+            "calorii":387
+        },
+        "cacao":{
+            "cantitate":10,
+            "unitate":"g",
+            "calorii":22.8
+        },
+        "vanilie":{
+            "cantitate":10,
+            "unitate":"g",
+            "calorii":28.8
+        },
+        "nuci":{
+            "cantitate":10,
+            "unitate":"g",
+            "calorii":65.4
+        },
+        "alune":{
+            "cantitate":1,
+            "unitate":"unitate",
+            "calorii":8.8
+        },
+        "capsuni":{
+            "cantitate":1,
+            "unitate":"unitate",
+            "calorii":3.1
+        },
+        "frisca":{
+            "cantitate":10,
+            "unitate":"g",
+            "calorii":25.6
+        },
+        "frunze de ciocolata":{
+            "cantitate":1,
+            "unitate":"unitate",
+            "calorii":50.2
+        }
+    }
+}

@@ -1,0 +1,97 @@
+@charset "UTF-8";
+body {
+    --culoare-inchisa: #2b7a78;
+    --culoare-deschisa: #3aafa9;
+    --culoare-text: #17252a;
+    --culoare-border: #17252a;
+    --text-selectat: #def2f1;
+}
+
+nav {
+    --inaltime-meniu: 2.5em;
+    --latime-buton: 18.25vw;
+    height: var(--inaltime-meniu);
+    background-color: var(--culoare-deschisa);
+    font-weight: bolder;
+}
+
+#hamburger,
+#ch-menu,
+#acasa-mediu {
+    display: none;
+}
+
+.meniu {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: var(--culoare-deschisa);
+}
+.meniu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: var(--culoare-deschisa);
+}
+.meniu li {
+    width: var(--latime-buton);
+    height: var(--inaltime-meniu);
+    text-align: center;
+    box-sizing: border-box;
+}
+.meniu li div,
+.meniu li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    line-height: var(--inaltime-meniu);
+    color: var(--culoare-text);
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: all 0.4s linear;
+}
+.meniu li:hover > ul {
+    display: block;
+    position: absolute;
+    z-index: 100;
+    animation: animatie_submeniu 1s linear 1 forwards;
+}
+.meniu ul {
+    display: none;
+    opacity: 0;
+    transform-origin: center top;
+    transform: scaleY(0);
+}
+.meniu > li:hover {
+    box-shadow: 0px 0px 15px 1px var(--culoare-umbra) inset;
+    transition: box-shadow 0.5s linear;
+}
+
+@media screen and (min-width: 1200px) {
+    .meniu li > ul > li:hover > a::before {
+        content: "→ ";
+        position: absolute;
+        left: -0.25rem;
+        opacity: 0;
+        font-size: 1rem;
+        line-height: 2.2rem;
+        transform: scaleX(0);
+        animation: animatie_sageata 0.6s ease-in-out 1 forwards;
+    }
+}
+@keyframes animatie_sageata {
+    100% {
+        opacity: 1;
+        transform: scaleX(1) translateX(0.55rem);
+    }
+}
+@keyframes animatie_submeniu {
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+/*# sourceMappingURL=navBackup.css.map */

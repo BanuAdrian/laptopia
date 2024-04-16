@@ -1,0 +1,185 @@
+{
+    "cale_galerie": "resurse/imagini/galerie-statica",
+    "imagini": [
+        {
+            "cale_relativa": "laptop-dimineata-1.jpg",
+            "nume": "Imagine cu laptop dimineata",
+            "descriere": "Relaxare pe laptop",
+            "timp": "dimineata"
+        },
+        {
+            "cale_relativa": "laptop-dimineata-2.jpg",
+            "nume": "Imagine cu laptop dimineata",
+            "descriere": "Activitati de birou",
+            "timp": "dimineata"
+        },
+        {
+            "cale_relativa": "laptop-dimineata-3.jpg",
+            "nume": "Imagine cu laptop dimineata",
+            "descriere": "Activitati organizatorice",
+            "timp": "dimineata"
+        },
+        {
+            "cale_relativa": "laptop-dimineata-4.jpg",
+            "nume": "Imagine cu laptop dimineata",
+            "descriere": "Teme pentru scoala",
+            "timp": "dimineata"
+        },
+        {
+            "cale_relativa": "laptop-dimineata-5.jpg",
+            "nume": "Imagine cu laptop dimineata",
+            "descriere": "Programare",
+            "timp": "dimineata"
+        },
+        {
+            "cale_relativa": "laptop-dimineata-6.jpg",
+            "nume": "Imagine cu laptop dimineata",
+            "descriere": "Producere de muzica",
+            "timp": "dimineata"
+        },
+        {
+            "cale_relativa": "laptop-dimineata-7.jpg",
+            "nume": "Imagine cu laptop dimineata",
+            "descriere": "Design minimalist",
+            "timp": "dimineata"
+        },
+        {
+            "cale_relativa": "laptop-dimineata-8.jpg",
+            "nume": "Imagine cu laptop dimineata",
+            "descriere": "Intalnire de birou",
+            "timp": "dimineata"
+        },
+        {
+            "cale_relativa": "laptop-dimineata-9.jpg",
+            "nume": "Imagine cu laptop dimineata",
+            "descriere": "Amicul blanos",
+            "timp": "dimineata"
+        },
+        {
+            "cale_relativa": "laptop-dimineata-10.jpg",
+            "nume": "Imagine cu laptop dimineata",
+            "descriere": "Activitati matinale",
+            "timp": "dimineata"
+        },
+        {
+            "cale_relativa": "laptop-zi-1.jpg",
+            "nume": "Imagine cu laptop ziua",
+            "descriere": "Editare fotografii",
+            "timp": "zi"
+        },
+        {
+            "cale_relativa": "laptop-zi-2.jpg",
+            "nume": "Imagine cu laptop ziua",
+            "descriere": "Blogging",
+            "timp": "zi"
+        },
+        {
+            "cale_relativa": "laptop-zi-3.jpg",
+            "nume": "Imagine cu laptop ziua",
+            "descriere": "Vacanta exotica",
+            "timp": "zi"
+        },
+        {
+            "cale_relativa": "laptop-zi-4.jpg",
+            "nume": "Imagine cu laptop ziua",
+            "descriere": "In aer liber",
+            "timp": "zi"
+        },
+        {
+            "cale_relativa": "laptop-zi-5.jpg",
+            "nume": "Imagine cu laptop ziua",
+            "descriere": "Multitasking",
+            "timp": "zi"
+        },
+        {
+            "cale_relativa": "laptop-zi-6.jpg",
+            "nume": "Imagine cu laptop ziua",
+            "descriere": "Pauza de masa",
+            "timp": "zi"
+        },
+        {
+            "cale_relativa": "laptop-zi-7.jpg",
+            "nume": "Imagine cu laptop ziua",
+            "descriere": "Web surfing",
+            "timp": "zi"
+        },
+        {
+            "cale_relativa": "laptop-zi-8.jpg",
+            "nume": "Imagine cu laptop ziua",
+            "descriere": "Pauza de serial",
+            "timp": "zi"
+        },
+        {
+            "cale_relativa": "laptop-zi-9.jpg",
+            "nume": "Imagine cu laptop ziua",
+            "descriere": "Teme pentru acasa",
+            "timp": "zi"
+        },
+        {
+            "cale_relativa": "laptop-zi-10.jpg",
+            "nume": "Management baza de date",
+            "descriere": "",
+            "timp": "zi"
+        },
+        {
+            "cale_relativa": "laptop-noapte-1.jpg",
+            "nume": "Imagine cu laptop noaptea",
+            "descriere": "Luminite RGB",
+            "timp": "noapte"
+        },
+        {
+            "cale_relativa": "laptop-noapte-2.jpg",
+            "nume": "Imagine cu laptop noaptea",
+            "descriere": "Laptop folosit de DJ",
+            "timp": "noapte"
+        },
+        {
+            "cale_relativa": "laptop-noapte-3.jpg",
+            "nume": "Imagine cu laptop noaptea",
+            "descriere": "Web developer",
+            "timp": "noapte"
+        },
+        {
+            "cale_relativa": "laptop-noapte-4.jpg",
+            "nume": "Imagine cu laptop noaptea",
+            "descriere": "Editare fotografii",
+            "timp": "noapte"
+        },
+        {
+            "cale_relativa": "laptop-noapte-5.jpg",
+            "nume": "Imagine cu laptop noaptea",
+            "descriere": "Social media",
+            "timp": "noapte"
+        },
+        {
+            "cale_relativa": "laptop-noapte-6.jpg",
+            "nume": "Imagine cu laptop noaptea",
+            "descriere": "Si mai multe luminite RGB",
+            "timp": "noapte"
+        },
+        {
+            "cale_relativa": "laptop-noapte-7.jpg",
+            "nume": "Imagine cu laptop noaptea",
+            "descriere": "Activitati nocturne",
+            "timp": "noapte"
+        },
+        {
+            "cale_relativa": "laptop-noapte-8.jpg",
+            "nume": "Imagine cu laptop noaptea",
+            "descriere": "O seara lo-fi",
+            "timp": "noapte"
+        },
+        {
+            "cale_relativa": "laptop-noapte-9.jpg",
+            "nume": "Imagine cu laptop noaptea",
+            "descriere": "Inainte de culcare",
+            "timp": "noapte"
+        },
+        {
+            "cale_relativa": "laptop-noapte-10.jpg",
+            "nume": "Imagine cu laptop noaptea",
+            "descriere": "Stilizare in CSS",
+            "timp": "noapte"
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "cale_baza": "/resurse/imagini/erori",
+    "eroare_default": {
+        "titlu": "EROARE!",
+        "text": "Site-ul a întâmpinat o eroare!",
+        "imagine": "eroare-generala.png"
+    },
+    "info_erori": [
+        {
+            "identificator": "400",
+            "status": "true",
+            "titlu": "Bad Request",
+            "text": "Probabil ai introdus incorect o adresă sau ai folosit un link învechit!",
+            "imagine": "400.png"
+        },
+        {
+            "identificator": "403",
+            "status": "true",
+            "titlu": "Forbidden",
+            "text": "Accesul interzis către resursa specificată!",
+            "imagine": "403.jpg"
+        },
+        {
+            "identificator": "404",
+            "status": "true",
+            "titlu": "Oops!",
+            "text": "Pagina pe care o cauți probabil a fost mutată, ștearsă sau nu a existat niciodată.",
+            "imagine": "404.png"
+        },
+        {
+            "identificator": "503",
+            "status": "true",
+            "titlu": "Service Unavailable",
+            "text": "Serverul este ocupat momentan. Vă rugăm să reveniți mai târziu!",
+            "imagine": "503.jpg"
+        }
+    ]
+}

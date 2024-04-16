@@ -1,0 +1,447 @@
+body {
+    --culoare1: #17252a;
+    --culoare2: #2b7a78;
+    --culoare3: #3aafa9;
+    --culoare4: #def2f1;
+    --culoare5: #feffff;
+}
+
+html {
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+body {
+    --spatiere: 60px;
+    padding-left: var(--spatiere);
+    padding-right: var(--spatiere);
+}
+
+p {
+    transition: font-size 0.5s ease-in-out;
+}
+
+h1,
+h2,
+h3,
+b,
+strong {
+    font-weight: bold;
+}
+
+#header h1,
+#welcome h2 {
+    margin-bottom: 1em;
+}
+
+.intro-livrare p {
+    color: var(--culoare2);
+    text-decoration: underline;
+    margin-top: 1em;
+}
+
+@media screen and (max-width: 1200px) {
+    body {
+        --spatiere: 25px;
+        padding-left: var(--spatiere);
+        padding-right: var(--spatiere);
+    }
+    p {
+        transition: none;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    body {
+        --spatiere: 10px;
+        padding-left: var(--spatiere);
+        padding-right: var(--spatiere);
+    }
+    p {
+        transition: none;
+    }
+}
+
+/* LEGATURA CATRE INCEPUTUL PAGINII */
+
+#link-top {
+    position: fixed;
+    bottom: 0.5em;
+    opacity: 0.5;
+    left: 0.3em;
+    width: 2.5rem;
+    box-sizing: border-box;
+    height: 2.5rem;
+    line-height: 3rem;
+    text-align: center;
+    border: 3px solid var(--culoare3);
+    background: rgb(220, 220, 220);
+    transition: background-color 400ms linear;
+    transform: rotate(45deg);
+}
+#link-top:hover {
+    opacity: 1;
+}
+#triunghi {
+    height: 0px;
+    width: 0;
+    border-bottom: 1.5rem solid var(--culoare3);
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    border-left: 0.9rem solid transparent;
+    border-right: 0.9rem solid transparent;
+    vertical-align: center;
+    transition: border-bottom 300ms linear;
+    transform: rotate(-45deg) translateX(-5%) translateY(5%);
+}
+
+#link-top:hover {
+    background-color: var(--culoare3);
+}
+
+#link-top:hover > #triunghi {
+    border-bottom: 1.5rem solid var(--culoare5);
+}
+
+/* TABEL */
+
+#tab-oferte {
+    border-spacing: 0px;
+    border-collapse: collapse;
+    border: 5px double var(--culoare1);
+}
+
+#tab-oferte td,
+tr,
+th {
+    transition: background-color 0.75s linear, color 0.75s linear,
+        border 0.75s linear;
+}
+
+#tab-oferte th {
+    font-weight: bold;
+}
+
+#tab-oferte th,
+#tab-oferte td {
+    border: 1px solid black;
+}
+
+#tab-oferte th:nth-child(odd) {
+    color: var(--culoare3);
+}
+
+/* #tab-oferte td:nth-child(odd) {
+    color: var(--culoare3);
+} */
+
+#tab-oferte th:nth-child(even) {
+    color: #17252a;
+}
+
+#tab-oferte tr:hover > td,
+#tab-oferte tr:hover > tr,
+#tab-oferte tr:hover > th {
+    background-color: var(--culoare2);
+    color: var(--culoare4);
+    border: 5px solid black;
+}
+
+#tab-oferte caption {
+    display: table-caption;
+    caption-side: bottom;
+}
+
+@media screen and (max-width: 1200px) {
+    #tab-oferte {
+        width: 200%;
+    }
+    #container-tab-oferte {
+        overflow: scroll;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #tab-oferte {
+        width: 200%;
+    }
+    #container-tab-oferte {
+        overflow: scroll;
+    }
+}
+
+/* STILIZARE IFRAME-URI */
+
+.container-iframe {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.container-iframe iframe {
+    box-sizing: border-box;
+    border: 10px inset var(--culoare2);
+    width: 100%;
+    height: 500px;
+}
+
+.taburi-iframe {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.taburi-iframe a {
+    display: block;
+    font-size: 0.8rem;
+    padding: 0.1rem;
+    width: 8rem;
+    height: 4.5rem;
+    line-height: 1.4rem;
+    font-weight: bold;
+    box-shadow: 0px -20px 30px 0px white inset, 0px 5px 20px 5px grey inset,
+        0px 30px 0px 30px var(--culoare2) inset;
+    border: 12px solid var(--culoare2);
+    outline: 3px solid white;
+    outline-offset: -6px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    background-color: var(--culoare2);
+    color: var(--culoare2);
+    text-decoration: none;
+    text-align: center;
+    transition: box-shadow 0.5s linear;
+    text-shadow: 2px 0px 5px white, 2px 0px 5px white, 2px 0px 5px white,
+        2px 0px 5px white;
+}
+
+.taburi-iframe > a:hover {
+    box-shadow: 0px -40px 30px 0px white inset,
+        0px 5px 40px 0px var(--culoare2) inset;
+}
+
+#formula-rate mi {
+    font-weight: bolder;
+}
+
+#pret-lunar {
+    color: var(--culoare2);
+    font-style: italic;
+}
+
+#formula-rate mo {
+    color: var(--culoare3);
+}
+
+img,
+video,
+picture {
+    min-width: 5%;
+    max-width: 100%;
+    min-height: 10%;
+    max-height: 50%;
+    /* width: 60%;
+    height: 30%; */
+}
+
+#laptop-figure {
+    width: 75%;
+}
+
+#watermark {
+    display: none;
+}
+
+#container-video {
+    display: flex;
+    justify-content: center;
+}
+
+#container-video video {
+    width: 60%;
+    height: 30%;
+}
+
+#container-video video::cue {
+    background-color: var(--culoare4);
+    color: var(--culoare1);
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.9em;
+}
+
+a {
+    color: #17252a;
+}
+a:visited {
+    color: var(--culoare3);
+}
+a[href^="http"]:before {
+    content: "\2BB3";
+    font-size: 1.5em;
+}
+
+a[href^="http"]:hover:before {
+    color: var(--culoare1);
+}
+
+main a,
+footer a {
+    background-image: radial-gradient(
+        ellipse at center,
+        var(--culoare2) 0%,
+        var(--culoare2) 40%,
+        transparent 80%,
+        transparent 100%
+    );
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0%;
+    transition: background-size 1s linear;
+}
+
+main a:hover,
+footer a:hover {
+    background-size: 100%;
+}
+main a:active,
+footer a:active {
+    border: 1px solid var(--culoare1);
+}
+
+#container-eroare {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px solid red; */
+    text-align: center;
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    transform: translateX(30%);
+    padding: 10px;
+    width: 60%;
+}
+
+#container-eroare img {
+    /* width: 500px; */
+    width: 75%;
+    /* min-width: 50%;
+    max-width: 50%; */
+    margin-top: 20px;
+}
+
+#container-eroare h1 {
+    font-size: 5rem;
+    margin-bottom: 20px;
+}
+
+#container-eroare p {
+    font-size: 1.5rem;
+}
+
+/* IMAGINE DUOTONE */
+
+#imagine-duotone {
+    position: relative;
+    background-image: url("../imagini/imagine-duotone.jpg");
+    background-size: cover;
+    width: 500px;
+    height: 500px;
+    filter: brightness(200%) grayscale(0);
+    transition: all 2s linear;
+    border-radius: 30px;
+    box-shadow: 5px 0px 20px black;
+}
+
+#imagine-duotone:after,
+#imagine-duotone:before {
+    content: " ";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 30px;
+    transition: all 2s linear;
+}
+
+#imagine-duotone:after {
+    /* background-color: rgb(0, 0, 255); */
+    background-color: var(--culoare1);
+    mix-blend-mode: lighten;
+}
+
+#imagine-duotone:before {
+    /* background-color: rgb(205, 0, 255); */
+    background-color: var(--culoare3);
+    mix-blend-mode: darken;
+}
+
+#imagine-duotone:hover:after {
+    background-color: rebeccapurple;
+    mix-blend-mode: lighten;
+}
+#imagine-duotone:hover:before {
+    background-color: lightyellow;
+    mix-blend-mode: darken;
+}
+
+/* EFECT REFLEXIE TEXT */
+
+#titlu-welcome-reflectat {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    /* mask-mode: luminance; */
+    transform-origin: 0 0;
+    transform: rotateX(180deg) skew(-45deg) scaleY(0.5) translate(10px, -25px);
+    opacity: 0.55;
+    mask-image: repeating-radial-gradient(circle, black, transparent 15px);
+}
+
+#titlu-welcome {
+    position: relative;
+}
+
+#titlu-welcome-reflectat:hover {
+    animation: unde-miscatoare 0.6s ease-in forwards infinite;
+}
+
+@keyframes unde-miscatoare {
+    25% {
+        mask-image: repeating-radial-gradient(circle, black, transparent 13px);
+    }
+    50% {
+        mask-image: repeating-radial-gradient(circle, black, transparent 11px);
+    }
+    75% {
+        mask-image: repeating-radial-gradient(circle, black, transparent 9px);
+    }
+    100% {
+        mask-image: repeating-radial-gradient(circle, black, transparent 7px);
+    }
+}
+
+/* STILIZARE HR */
+
+#hr-welcome {
+    height: 5px;
+    background: radial-gradient(circle, transparent 7.5%, var(--culoare3) 5%);
+    border-color: transparent;
+    border-radius: 5px;
+    opacity: 1;
+    /* position: relative; */
+}
+
+#hr-welcome:before {
+    content: "✽";
+    position: absolute;
+    left: 49.5%;
+    transform: translateY(-11px);
+    /* background-color: red */
+    /* display: block; */
+    /* width: 10px; */
+    /* height: 5px;  */
+}

@@ -1,0 +1,23 @@
+nav {
+  --inaltime-meniu:2.2em;
+  /* --latime-buton: 217.5px; */
+  --latime-buton:17.75vw;
+  font-size: 1.25vw;
+}
+
+.meniu li:hover {
+  box-shadow: 0px 0px 15px 1px var(--culoare-umbra) inset;
+  transition: box-shadow 0.5s linear;
+}
+
+#acasa-mediu {
+  display: block;
+}
+
+#acasa {
+  display: none;
+}
+
+
+
+/*# sourceMappingURL=nav1200.css.map */

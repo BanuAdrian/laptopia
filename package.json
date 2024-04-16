@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "ejs": "^3.1.9",
+    "express": "^4.19.1",
+    "pg": "^8.11.5",
+    "sass": "^1.74.1",
+    "sharp": "^0.33.3"
+  },
+  "name": "proiect-tw",
+  "version": "1.0.0",
+  "description": "magazin online de laptopuri",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BanuAdrian/proiect-tw.git"
+  },
+  "keywords": [
+    "laptopia.ro"
+  ],
+  "author": "Constantin-Adrian Banu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BanuAdrian/proiect-tw/issues"
+  },
+  "homepage": "https://github.com/BanuAdrian/proiect-tw#readme"
+}

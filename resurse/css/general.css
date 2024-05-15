@@ -1,9 +1,49 @@
+/* SCHEMA CROMATICA */
+
 body {
     --culoare1: #17252a;
     --culoare2: #2b7a78;
     --culoare3: #3aafa9;
     --culoare4: #def2f1;
     --culoare5: #feffff;
+    --culoare-umbra: rgb(0 0 0 / 0.3);
+}
+
+body.dark {
+    /* 240750 344C64 577B8D 57A6A1 */
+    /* 092635 1B4242 5C8374 9EC8B9*/
+    --culoare1: #def2f1;
+    --culoare2: #092635;
+    --culoare3: #1b4242;
+    --culoare4: #5c8374;
+    --culoare5: #9ec8b9;
+    --culoare-bg: black;
+    --culoare-umbra: #2b7a78;
+    --culoare-text: white;
+    color: var(--culoare-text);
+    background-color: var(--culoare-bg);
+}
+
+header {
+    position: relative;
+}
+
+#container-schimba-tema {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    right: 0;
+}
+
+#container-switch {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#schimba_tema {
+    width: 2rem;
 }
 
 html {
@@ -12,6 +52,8 @@ html {
     font-optical-sizing: auto;
     font-style: normal;
 }
+
+/* DESIGN RUDIMENTAR */
 
 body {
     --spatiere: 60px;
@@ -221,6 +263,8 @@ th {
         0px 5px 40px 0px var(--culoare2) inset;
 }
 
+/* STILIZARE FORMULA */
+
 #formula-rate mi {
     font-weight: bolder;
 }
@@ -233,6 +277,8 @@ th {
 #formula-rate mo {
     color: var(--culoare3);
 }
+
+/* DESIGN RUDIMENTAR */
 
 img,
 video,
@@ -249,9 +295,7 @@ picture {
     width: 75%;
 }
 
-#watermark {
-    display: none;
-}
+/* VIDEO CU SUBTITRARI */
 
 #container-video {
     display: flex;
@@ -269,6 +313,8 @@ picture {
     font-family: "Montserrat", sans-serif;
     font-size: 0.9em;
 }
+
+/* STILIZARE LINK-URI */
 
 a {
     color: #17252a;
@@ -308,6 +354,8 @@ main a:active,
 footer a:active {
     border: 1px solid var(--culoare1);
 }
+
+/* STILIZARE ERORI */
 
 #container-eroare {
     display: flex;

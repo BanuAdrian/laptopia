@@ -1,101 +1,121 @@
-/*facem vizibil iconul de hamburger meniu*/
-
 #hamburger {
-    display: block;
+  display: block;
 }
 
-#hamburger > img {
-    height: var(--inaltime-meniu);
-    min-width: 5%;
-    width: 5%;
-    display: block;
+#container-hamburger {
+  display: flex;
+  height: var(--inaltime-meniu);
+  min-width: 5%;
+  width: 5%;
+  flex-direction: column;
+  justify-content: space-around;
 }
-/* implicit meniul e ascuns*/
+
+.linie-hamburger {
+  border: 1.75px solid white;
+}
+
+#container-hamburger > :nth-child(1) {
+  animation: aparitie_hamburger 1s forwards, animatie_linie 2s forwards calc(1s + 1s * 2 / 10);
+}
+
+#container-hamburger > :nth-child(2) {
+  animation: aparitie_hamburger 1s forwards, animatie_linie 2s forwards calc(1s + 2s * 2 / 10);
+}
+
+#container-hamburger > :nth-child(3) {
+  animation: aparitie_hamburger 1s forwards, animatie_linie 2s forwards calc(1s + 3s * 2 / 10);
+}
+
 ul.meniu {
-    display: none;
-    position: absolute;
-    width: 100%;
+  display: none;
+  position: absolute;
+  width: 100%;
 }
 
 .meniu li:hover {
-    box-shadow: 0px 0px 15px 1px var(--culoare-umbra) inset;
-    transition: box-shadow 0.5s linear;
+  box-shadow: 0px 0px 15px 1px var(--culoare-umbra) inset;
+  transition: box-shadow 0.5s linear;
 }
 
-/*aici facem vizibil meniul cand facem click pe hamburger meniu*/
 #ch-menu:checked + ul.meniu {
-    display: block;
-    z-index: 2;
-    position: relative;
-
-    /* animation-name: aparitie_meniu_p;
-    animation-iteration-count: 1;
-    animation-duration: 0.7s;
-    animation-fill-mode: forwards;
-    animation-timing-function: linear; */
-
-    transform-origin: top left;
-    animation: aparitie_meniu_p 1s linear 1 forwards;
+  display: block;
+  z-index: 2;
+  position: relative;
+  transform-origin: top left;
+  animation: aparitie_meniu_p 1s linear 1 forwards;
 }
-
-/* pt taskul bonus  */
-
 #ch-menu:checked + ul.meniu > li > div,
 #ch-menu:checked + ul.meniu > li > a {
-    z-index: 2;
-    position: relative;
-    transform-origin: 50% 50%;
-    animation-name: aparitie_meniu_p_btn;
-    animation-iteration-count: 1;
-    animation-duration: 0.7s;
-    animation-fill-mode: forwards;
-    animation-timing-function: linear;
-}
-/*optiunile se intind pe toata latimea containerului*/
-nav ul.meniu li {
-    width: 100%;
+  z-index: 2;
+  position: relative;
+  transform-origin: 50% 50%;
+  animation-name: aparitie_meniu_p_btn;
+  animation-iteration-count: 1;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
 }
 
-/*meniul sa vina deasupra continutul de mai jos, fara sa impinga continutul*/
+nav ul.meniu li {
+  width: 100%;
+}
 nav ul.meniu > li ul {
-    position: absolute;
-    width: 100%;
-    z-index: 200;
-    transform: scale(1, 1) !important;
-    opacity: 1 !important;
+  position: absolute;
+  width: 100%;
+  z-index: 200;
+  transform: scale(1, 1) !important;
+  opacity: 1 !important;
 }
 
 #ch-menu:checked + ul.meniu > li ul > * {
-    position: relative;
-    z-index: 200;
-}
-nav ul.meniu > li:hover > ul {
-    z-index: 200;
-    animation: none;
+  position: relative;
+  z-index: 200;
 }
 
-/* pentru fiecare element din submeniu generam un triunghiulet alb inaintea lui*/
-/* nav ul.meniu > li li a:before {
-    content: " \25B7\00A0	";
-    color: white;
-} */
+nav ul.meniu > li:hover > ul {
+  z-index: 200;
+  animation: none;
+}
 
 @keyframes aparitie_meniu_p {
-    0% {
-        /* opacity: 0; */
-        transform: scale(0, 0);
-    }
-    100% {
-        /* opacity: 1; */
-        transform: scale(1, 1);
-    }
+  0% {
+    transform: scale(0, 0);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }
-
 @keyframes aparitie_meniu_p_btn {
-    0% {
-        transform: scale(0, 0);
-    }
-    100% {
-        transform: scale(1, 1);
-    }
+  0% {
+    transform: scale(0, 0);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+@keyframes aparitie_hamburger {
+  0% {
+    border: 1.75px solid black;
+    transform: rotate(45deg);
+    opacity: 0;
+  }
+  50% {
+    border: 1.75px solid grey;
+    transform: rotate(-45deg);
+    opacity: 0.5;
+  }
+  100% {
+    border: 1.75px solid white;
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+}
+@keyframes animatie_linie {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

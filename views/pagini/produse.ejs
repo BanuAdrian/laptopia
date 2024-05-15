@@ -1,80 +1,202 @@
 <!DOCTYPE html>
-<html  lang="ro">
-    <head>
-        <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
-        <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
-        <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
-        <title>Cofetăria Dulcelind - home</title>
-        <%- include("../fragmente/head") %>     
-        <script type="text/javascript" src=/resurse/js/produse.js></script>
+<html lang="ro">
 
-    </head>
-    <body>
-    <%- include("../fragmente/header") %>
+<head>
+	<meta name="description" content="Adaptează-ți stilul de viață digital cu selecția noastră exclusivă de laptopuri!">
+	<meta name="keywords" content="laptop, laptopuri, leptop, magazin de laptopuri, laptopuri online, laptopuri ieftine, laptop copii, notebook, ultrabook, macbook, laptopia, gaming, macos, windows, acer, apple, asus, dell, hp, lenovo, msi, transport la domiciliu, plata ramburs, plata card, romania" />
+	<link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
+	<title>Produse - Laptopia.ro</title>
+	<%- include("../fragmente/head") %>
+	<script type="text/javascript" src=/resurse/js/produse.js></script>
 
-    <main>
-        <label> Nume: <input type="text" id="inp-nume"></label>
-        <!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
-        <div> Calorii:<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-            <p><label>Dietetic (calorii &lt; 350)
-                <input id="i_rad1"  name="gr_rad" value="0:350" type="radio"/>
-            </label></p>
-            <p><label>Mediu (350 &le; calorii &lt; 700)
-                <input id="i_rad2"  name="gr_rad" value="350:750" type="radio"/>
-            </label>
-            <p><label>Ridicat caloric (700 &le; calorii)
-                <input id="i_rad3" name="gr_rad" value="700:1000000000" type="radio"/>
-            </label>
-            <p><label>Toate
-                <input id="i_rad4" checked name="gr_rad" value="toate" type="radio"/>
-            </label>
-        </div>
+</head>
 
+<body>
+	<%- include("../fragmente/header") %>
 
-        <label> Pret minim: <input type="range" id="inp-pret" value="0" min="0"  max="70"> <span id="infoRange">(0)</span></label>
-        <label>Select simplu:
-            <select id="inp-categorie">
-                <option id="sel-toate" selected value="toate">toate</option>
-                <% for (let opt of locals.optiuni) { %>
-                    <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
-                <% } %>
-            </select>
-        </label>
-        <p>
-        <button id="filtrare">Filtreaza</button> 
+	<main>
+		<div id="container-inputuri">
 
-        <button id="resetare">Reseteaza</button><br/>
-        <button id="sortCrescNume">Sorteaza crescator dupa pret si nume</button>
-        <button id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button>
-        
-        </p>
-        
-        <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
-        <section id="produse">
-            <h2>Produse</h2>
-            <div class="grid-produse">
-                <% for( let prod of locals.produse) { %>
-                    <article class="produs" >
-                        <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
-                        <div class="info-prod">
-                            <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
-                            <p class="calorii">Calorii: <span class="val-calorii"><%- prod.calorii%></span></p>
-                            <p class="gramaj">Gramaj: <span class="val-gramaj"><%- prod.gramaj%></span></p>
-                        </div>
-                        <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p>
-                        <figure>
-                            <a href="/produs/<%-prod.id %>" ><img src="/resurse/imagini/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
-                        </figure>
-                        <label class="selecteaza-cos">
-                            Selectează:<br/>
-                            <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-                        </label>
-                    </article>
-                <% }%>
-            </div>
-        </section>
-    </main>
+			<div class="row">
+				<div class="col-4">
+					<!-- SPECIFICATII -->
+					<label><b>Specificatii:</b>:
+						<div class="form-floating">
+							<input type="text" id="inp-spec" name="inp-spec" class="form-control">
+							<label id="label-spec-invalida" for="inp-spec"></label>
+						</div>
+					</label>
+					<!-- ------------ -->
+				</div>
+				<div class="col-4">
+					<!-- CULOARE -->
+					<label><b>Culoare:</b>
+						<div class="form-floating">
+							<input list="culori-laptop" id="inp-culoare" name="inp-culoare" class="form-control" />
+							<label id="label-culoare-invalida" for="inp-culoare"></label>
+							<datalist id="culori-laptop">
+								<option value="gri"></option>
+								<option value="alb"></option>
+								<option value="negru"></option>
+								<option value="argintiu"></option>
+								<option value="albastru"></option>
+							</datalist>
+						</div>
+					</label>
+					<!-- ------- -->
+				</div>
+				<div class="col-4">
+					<!-- DESCRIERE -->
+					<label><b>Descriere:</b>
+						<div class="form-floating">
+							<textarea class="form-control" id="inp-descriere" rows="2" cols="50"></textarea>
+						</div>
+					</label>
+					<!-- --------- -->
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-4">
+					<!-- RESIGILAT -->
+					<b>Resigilat:</b><br>
+					<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
+					<input class="btn-check" id="i_rad1" name="gr_rad" value="true" type="radio" autocomplete="off" />
+					<label class="btn btn-sm btn-outline-primary" for="i_rad1">Da</label>
 
-    <%- include("../fragmente/footer") %>
-    </body>
+					<input class="btn-check" id="i_rad2" name="gr_rad" value="false" type="radio" autocomplete="off" />
+					<label class="btn btn-sm btn-outline-primary" for="i_rad2">Nu</label>
+
+					<input class="btn-check" id="i_rad3" name="gr_rad" value="toate" type="radio" autocomplete="off" checked />
+					<label class="btn btn-sm btn-outline-primary" for="i_rad3">Toate</label>
+					<!-- --------- -->
+				</div>
+				<div class="col-8">
+					<!-- BRAND -->
+					<b>Brand:</b><br>
+					<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
+					<input class="btn-check" id="i_check1" checked name="gr_check" value="HP" type="checkbox" />
+					<label class="btn btn-sm btn-outline-primary" for="i_check1">HP</label>
+
+					<input class="btn-check" id="i_check2" checked name="gr_check" value="MSI" type="checkbox" />
+					<label class="btn btn-sm btn-outline-primary" for="i_check2">MSI</label>
+
+					<input class="btn-check" id="i_check3" checked name="gr_check" value="Dell" type="checkbox" />
+					<label class="btn btn-sm btn-outline-primary" for="i_check3">Dell</label>
+
+					<input class="btn-check" id="i_check4" checked name="gr_check" value="ASUS" type="checkbox" />
+					<label class="btn btn-sm btn-outline-primary" for="i_check4">ASUS</label>
+
+					<input class="btn-check" id="i_check5" checked name="gr_check" value="ACER" type="checkbox" />
+					<label class="btn btn-sm btn-outline-primary" for="i_check5">ACER</label>
+
+					<input class="btn-check" id="i_check6" checked name="gr_check" value="Apple" type="checkbox" />
+					<label class="btn btn-sm btn-outline-primary" for="i_check6">Apple</label>
+
+					<input class="btn-check" id="i_check7" checked name="gr_check" value="Lenovo" type="checkbox" />
+					<label class="btn btn-sm btn-outline-primary" for="i_check7">Lenovo</label>
+
+					<input class="btn-check" id="i_check8" checked name="gr_check" value="Microsoft" type="checkbox" />
+					<label class="btn btn-sm btn-outline-primary" for="i_check8">Microsoft</label>
+				</div>
+				<!-- ------- -->
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-4">
+					<!-- CATEGORIE -->
+					<label><b>Categorie:</b><br>
+						<select class="form-control" id="inp-categorie">
+							<option id="sel-toate" selected value="toate">toate</option>
+							<% for (let opt of locals.optiuni) { %>
+							<option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
+							<% } %>
+							<!-- for-ul asta pt meniul de la ex 4 doar modificam putin -->
+						</select>
+					</label>
+					<!-- --------- -->
+				</div>
+				<div class="col-4">
+					<!-- VALORI NEDORITE -->
+					<label><b>Selectați valorile pe care NU le doriți:</b><br>
+						<select class="form-control" id="inp-valori-nedorite" multiple>
+							<option value="AMD Ryzen"> AMD Ryzen</option>
+							<option value="Intel Core i5"> Intel Core i5</option>
+							<option value="Intel Core i7"> Intel Core i7</option>
+							<option value="13 inch"> 13 inch</option>
+							<option value="13.3 inch"> 13.3 inch</option>
+							<option value="13.6 inch"> 13.6 inch</option>
+							<option value="14 inch"> 14 inch</option>
+							<option value="14.5 inch"> 14.5 inch</option>
+							<option value="15.6 inch"> 15.6 inch</option>
+							<option value="16 inch"> 16 inch</option>
+							<option value="8GB RAM"> 8GB RAM</option>
+							<option value="16GB RAM"> 16GB RAM</option>
+							<option value="SSD 256GB"> SSD 256GB</option>
+							<option value="SSD 512GB"> SSD 512GB</option>
+							<option value="SSD 1TB"> SSD 1TB</option>
+							<option value="Windows"> Windows</option>
+							<option value="Free DOS"> Free DOS</option>
+							<option value="Ubuntu"> Ubuntu</option>
+							<option value="macOS"> macOS</option>
+							<!-- for-ul asta pt meniul de la ex 4 doar modificam putin -->
+						</select>
+					</label>
+					<!-- -------- -->
+				</div>
+				<div class="col-4">
+					<!-- PRET -->
+					<label><b>Pret:</b><br>
+						<input class="form-range" type="range" id="inp-pret" value="899" min="899" max="10799"> <span id="infoRange">(899)</span>
+					</label>
+					<!-- ---- -->
+				</div>
+			</div>
+			<hr>
+			<!-- BUTOANE -->
+			<div id="container-butoane">
+				<button id="filtrare" class="btn btn-primary btn-sm btn-border-radius-sm"><i class="bi bi-funnel"></i><span class="span-buton"> Filtreaza</span></button>
+				<button id="resetare" class="btn btn-primary btn-sm btn-border-radius-sm"><i class="bi bi-arrow-clockwise"></i><span class="span-buton"> Reseteaza</span></button><br />
+				<button id="sortCrescBrand" class="btn btn-primary btn-sm btn-border-radius-sm"><i class="bi bi-sort-up"></i><span class="span-buton"> Sorteaza crescator dupa brand si pret</span></button>
+				<button id="sortDescrescBrand" class="btn btn-primary btn-sm btn-border-radius-sm"><i class="bi bi-sort-down"></i><span class="span-buton"> Sorteaza descrescator dupa brand si pret</span></button><br>
+				<button id="calculeazaMaxim" class="btn btn-primary btn-sm btn-border-radius-sm"><i class="bi bi-calculator-fill"></i><span class="span-buton"> Calculeaza maximul preturilor produselor afisate</span></button>
+			</div>
+			<!-- ------- -->
+		</div>
+		<section id="produse">
+			<h2>Produse</h2>
+			<div class="grid-produse">
+				<% for( let prod of locals.produse) { %>
+				<article class="produs">
+					<h5 class="nume"><b class="nume-caracteristica">Nume</b>: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%- prod.nume%></span></a></h3>
+						<div class="info-prod">
+							<div class="first-col">
+								<p class="categorie"><b class="nume-caracteristica">Categorie</b>: <span class="val-categorie"><%- prod.categorie%></span></p>
+								<figure>
+									<a href="/produs/<%-prod.id %>"><img src="/resurse/imagini/laptopuri/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
+								</figure>
+								<p class="descriere"><b class="nume-caracteristica">Descriere</b>: <span class="val-descriere"><%- prod.descriere%></span></p>
+							</div>
+							<div class="second-col">
+								<p class="pret"><b class="nume-caracteristica">Pret</b>: <span class="val-pret"><%- prod.pret%></span> RON</p>
+								<p class="brand"><b class="nume-caracteristica">Brand</b>: <span class="val-brand"><%- prod.brand%></span></p>
+								<p class="culoare"><b class="nume-caracteristica">Culoare</b>: <span class="val-culoare"><%- prod.culoare%></span></p>
+								<p class="specificatii"><b class="nume-caracteristica">Specificatii</b>: <span class="val-specificatii"><%- prod.specificatii%></span></p>
+								<p class="data"><b class="nume-caracteristica">Data adaugarii</b>: <time class="val-data" datetime="15-09-2018" lang="ro"><%- prod.data_adaugare%></time></p>
+								<p class="resigilat"><b class="nume-caracteristica">Resigilat</b>: <span class="val-resigilat"><%- prod.resigilat%></span></p>
+							</div>
+						</div>
+						<!-- <label class="selecteaza-cos">
+							Selectează:<br />
+							<input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
+						</label> -->
+				</article>
+				<% }%>
+			</div>
+		</section>
+	</main>
+
+	<%- include("../fragmente/footer") %>
+</body>
+
 </html>

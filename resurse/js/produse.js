@@ -1,163 +1,273 @@
-window.addEventListener("load",function() {
+window.addEventListener("load", function () {
+    // console.log(document.getElementById("produse").innerHTML);
+    // this.document.getElementById("filtrare").onclick = function(){}
 
+    document.getElementById("inp-pret").onchange = function () {
+        document.getElementById("infoRange").innerHTML = `(${this.value})`;
+    };
 
-    let iduriProduse=localStorage.getItem("cos_virtual");
-    iduriProduse=iduriProduse?iduriProduse.split(","):[];      //["3","1","10","4","2"]
+    document.getElementById("filtrare").addEventListener("click", function () {
+        var inpSpec = document
+            .getElementById("inp-spec")
+            .value.trim()
+            .toLowerCase();
+        var inpPret = parseInt(document.getElementById("inp-pret").value);
 
-    for(let idp of iduriProduse){
-        let ch = document.querySelector(`[value='${idp}'].select-cos`);
-        if(ch){
-            ch.checked=true;
-        }
-        else{
-            console.log("id cos virtual inexistent:", idp);
-        }
-    }
+        var vRadio = document.getElementsByName("gr_rad");
+        var inpResigilat;
 
-    //----------- adaugare date in cosul virtual (din localStorage)
-    let checkboxuri= document.getElementsByClassName("select-cos");
-    for(let ch of checkboxuri){
-        ch.onchange=function(){
-            let iduriProduse=localStorage.getItem("cos_virtual");
-            iduriProduse=iduriProduse?iduriProduse.split(","):[];
-
-            if( this.checked){
-                iduriProduse.push(this.value)
-            }
-            else{
-                let poz= iduriProduse.indexOf(this.value);
-                if(poz != -1){
-                    iduriProduse.splice(poz,1);
-                }
-            }
-
-            localStorage.setItem("cos_virtual", iduriProduse.join(","))
-        }
-        
-    }
-
-
-    document.getElementById("inp-pret").onchange=function(){
-        document.getElementById("infoRange").innerHTML=`(${this.value})`
-    }
-
-
-    document.getElementById("filtrare").onclick= function(){
-        let val_nume=document.getElementById("inp-nume").value.toLowerCase();
-
-        let radiobuttons=document.getElementsByName("gr_rad");
-        let val_calorii;
-        for(let r of radiobuttons){
-            if(r.checked){
-                val_calorii=r.value;
+        for (let r of vRadio) {
+            if (r.checked) {
+                inpResigilat = r.value;
                 break;
             }
         }
 
-        var cal_a, cal_b;
-        if(val_calorii!="toate")
-        {
-            [cal_a, cal_b]=val_calorii.split(":");
-            cal_a=parseInt(cal_a);
-            cal_b=parseInt(cal_b);
+        var vCheck = document.getElementsByName("gr_check");
+        var inpBrand = [];
+
+        for (let c of vCheck) {
+            if (c.checked) inpBrand.push(c.value);
         }
 
-        let val_pret=document.getElementById("inp-pret").value;
+        var inpCuloare = document
+            .getElementsByName("inp-culoare")[0]
+            .value.trim()
+            .toLowerCase();
 
-        let val_categ=document.getElementById("inp-categorie").value;
+        if (!inpCuloare.match(new RegExp("^[A-Za-z]*$"))) {
+            alert("Culoarea trebuie sa contina doar litere!");
+            // document.getElementsByName("inp-culoare")[0].value = "";
+            // inpCuloare = "";
+            document.getElementById("inp-culoare").classList.add("is-invalid");
+            document.getElementById("label-culoare-invalida").innerHTML =
+                "Culoare invalida!";
+            document.getElementById("container-inputuri").focus();
+            return;
+        }
+        document.getElementById("inp-culoare").classList.remove("is-invalid");
+        document.getElementById("label-culoare-invalida").innerHTML = "";
+        var inpDescriere = document
+            .getElementById("inp-descriere")
+            .value.trim()
+            .toLowerCase();
 
-        var produse=document.getElementsByClassName("produs");
+        var inpCateg = document
+            .getElementById("inp-categorie")
+            .value.trim()
+            .toLowerCase();
 
-        for (let prod of produse){
-            prod.style.display="none";
-            let nume=prod.getElementsByClassName("val-nume")[0].innerHTML.toLowerCase();
+        var arrayValNedorite = document.getElementById(
+            "inp-valori-nedorite"
+        ).options;
 
-            let cond1= (nume.startsWith(val_nume));
+        var inpNedorite = [];
 
-            let calorii=parseInt(prod.getElementsByClassName("val-calorii")[0].innerHTML);
-
-            let cond2= (val_calorii=="toate" || cal_a<=calorii && calorii <cal_b);
-
-            let pret=parseFloat(prod.getElementsByClassName("val-pret")[0].innerHTML);
-
-            let cond3= (pret>=val_pret);
-
-            let categorie=prod.getElementsByClassName("val-categorie")[0].innerHTML;
-            let cond4= ( val_categ=="toate" ||  val_categ==categorie)
-
-            if(cond1 && cond2 && cond3 && cond4){
-                prod.style.display="block";
+        for (let valoareNedorita of arrayValNedorite) {
+            if (valoareNedorita.selected) {
+                // if (
+                //     (inpSpec != "" &&
+                //         inpSpec.match(valoareNedorita.value.toLowerCase())) ||
+                //     valoareNedorita.value.toLowerCase().match(inpSpec)
+                // )
+                if (
+                    inpSpec.length != 0 &&
+                    (valoareNedorita.value.toLowerCase().includes(inpSpec) ||
+                        inpSpec.includes(valoareNedorita.value.toLowerCase()))
+                ) {
+                    alert(
+                        "Combinatia de specificatii si valori nedorite nu este permisa!"
+                    );
+                    document
+                        .getElementById("inp-spec")
+                        .classList.add("is-invalid");
+                    document.getElementById("label-spec-invalida").innerHTML =
+                        "Combinatie invalida!";
+                    // document.getElementById("inp-spec").value = "";
+                    // inpSpec = "";
+                    // valoareNedorita.selected = false;
+                    document.getElementById("container-inputuri").focus();
+                    return;
+                }
+                inpNedorite.push(valoareNedorita.value.toLowerCase());
             }
         }
-    }
+        document.getElementById("inp-spec").classList.remove("is-invalid");
+        document.getElementById("label-spec-invalida").innerHTML = "";
 
-    document.getElementById("resetare").onclick= function(){
-                
-        document.getElementById("inp-nume").value="";
-        
-        document.getElementById("inp-pret").value=document.getElementById("inp-pret").min;
-        document.getElementById("inp-categorie").value="toate";
-        document.getElementById("i_rad4").checked=true;
-        var produse=document.getElementsByClassName("produs");
-        document.getElementById("infoRange").innerHTML="(0)";
-        for (let prod of produse){
-            prod.style.display="block";
-        }
-    }
-    function sortare (semn){
-        var produse=document.getElementsByClassName("produs");
-        var v_produse= Array.from(produse);
-        v_produse.sort(function (a,b){
-            let pret_a=parseFloat(a.getElementsByClassName("val-pret")[0].innerHTML);
-            let pret_b=parseFloat(b.getElementsByClassName("val-pret")[0].innerHTML);
-            if(pret_a==pret_b){
-                let nume_a=a.getElementsByClassName("val-nume")[0].innerHTML;
-                let nume_b=b.getElementsByClassName("val-nume")[0].innerHTML;
-                return semn*nume_a.localeCompare(nume_b);
-            }
-            return semn*(pret_a-pret_b);
-        });
-        for(let prod of v_produse){
-            prod.parentElement.appendChild(prod);
-        }
-    }
-    document.getElementById("sortCrescNume").onclick=function(){
-        sortare(1);
-    }
-    document.getElementById("sortDescrescNume").onclick=function(){
-        sortare(-1);
-    }
+        var produse = document.getElementsByClassName("produs");
 
-
-    window.onkeydown= function(e){
-        if (e.key=="c" && e.altKey){
-            if(document.getElementById("info-suma"))
-                return;
-            var produse=document.getElementsByClassName("produs");
-            let suma=0;
-            for (let prod of produse){
-                if(prod.style.display!="none")
-                {
-                    let pret=parseFloat(prod.getElementsByClassName("val-pret")[0].innerHTML);
-                    suma+=pret;
+        for (let produs of produse) {
+            let cond1 = false;
+            let valSpec = produs
+                .getElementsByClassName("val-specificatii")[0]
+                .innerHTML.trim()
+                .toLowerCase();
+            let arraySpec = valSpec.split(",");
+            for (let spec of arraySpec) {
+                if (spec.includes(inpSpec)) {
+                    cond1 = true;
+                    break;
                 }
             }
-            
-            let p=document.createElement("p");
-            p.innerHTML=suma;
-            p.id="info-suma";
-            ps=document.getElementById("p-suma");
-            container = ps.parentNode;
-            frate=ps.nextElementSibling
-            container.insertBefore(p, frate);
-            setTimeout(function(){
-                let info=document.getElementById("info-suma");
-                if(info)
-                    info.remove();
-            }, 1000)
+
+            let valPret = parseInt(
+                produs.getElementsByClassName("val-pret")[0].innerHTML
+            );
+            let cond2 = valPret >= inpPret;
+
+            let valCuloare =
+                produs.getElementsByClassName("val-culoare")[0].innerHTML;
+            let cond3 = inpCuloare == valCuloare || inpCuloare == "";
+
+            let valResigilat =
+                produs.getElementsByClassName("val-resigilat")[0].innerHTML;
+            let cond4 = inpResigilat == "toate" || inpResigilat == valResigilat;
+
+            let valBrand =
+                produs.getElementsByClassName("val-brand")[0].innerHTML;
+            let cond5 = false;
+
+            for (let brand of inpBrand) {
+                if (brand == valBrand) {
+                    cond5 = true;
+                    break;
+                }
+            }
+
+            let valDescriere =
+                produs.getElementsByClassName("val-descriere")[0].innerHTML;
+            let cond6 = valDescriere.toLowerCase().includes(inpDescriere);
+
+            let valCategorie = produs
+                .getElementsByClassName("val-categorie")[0]
+                .innerHTML.trim()
+                .toLowerCase();
+            let cond7 = inpCateg == "toate" || inpCateg == valCategorie;
+
+            let cond8 = true;
+            for (let specNedorita of inpNedorite) {
+                for (let spec of arraySpec) {
+                    if (spec.includes(specNedorita)) {
+                        cond8 = false;
+                        break;
+                    }
+                }
+                if (!cond8) break;
+            }
+
+            if (
+                cond1 &&
+                cond2 &&
+                cond3 &&
+                cond4 &&
+                cond5 &&
+                cond6 &&
+                cond7 &&
+                cond8
+            ) {
+                produs.style.display = "block";
+            } else {
+                produs.style.display = "none";
+            }
+        }
+    });
+
+    document.getElementById("resetare").onclick = function () {
+        var afirmativ = confirm("Esti sigur ca vrei sa resetezi filtrele?");
+        if (afirmativ) {
+            document.getElementById("inp-spec").value = "";
+
+            document.getElementById("inp-pret").value =
+                document.getElementById("inp-pret").min;
+            document.getElementById("infoRange").innerHTML =
+                "(" + document.getElementById("inp-pret").min + ")";
+
+            document.getElementById("inp-culoare").value = "";
+            document
+                .getElementById("inp-culoare")
+                .classList.remove("is-invalid");
+            document.getElementById("label-culoare-invalida").innerHTML = "";
+
+            document.getElementById("i_rad3").checked = true;
+
+            for (let i = 1; i <= 8; ++i) {
+                document.getElementById("i_check" + i).checked = true;
+            }
+
+            document.getElementById("inp-descriere").value = "";
+
+            document.getElementById("inp-categorie").value = "toate";
+
+            var arrayValNedorite = document.getElementById(
+                "inp-valori-nedorite"
+            ).options;
+
+            for (let valoareNedorita of arrayValNedorite) {
+                valoareNedorita.selected = false;
+            }
+
+            var produse = document.getElementsByClassName("produs");
+            for (let prod of produse) {
+                prod.style.display = "block";
+            }
+        }
+    };
+
+    function sorteaza(semn) {
+        var produse = document.getElementsByClassName("produs");
+        var v_produse = Array.from(produse);
+        v_produse.sort(function (a, b) {
+            let brand_a = a.getElementsByClassName("val-brand")[0].innerHTML;
+            let brand_b = b.getElementsByClassName("val-brand")[0].innerHTML;
+            if (brand_a == brand_b) {
+                let pret_a = parseInt(
+                    a.getElementsByClassName("val-nume")[0].innerHTML
+                );
+                let pret_b = parseInt(
+                    b.getElementsByClassName("val-nume")[0].innerHTML
+                );
+                return semn * (pret_a - pret_b);
+            }
+            return semn * brand_a.localeCompare(brand_b);
+        });
+        for (let prod of v_produse) {
+            prod.parentNode.appendChild(prod);
         }
     }
 
+    document.getElementById("sortCrescBrand").onclick = function () {
+        sorteaza(1);
+    };
 
+    document.getElementById("sortDescrescBrand").onclick = function () {
+        sorteaza(-1);
+    };
 
+    document.getElementById("calculeazaMaxim").onclick = function () {
+        var maxim = 0;
+        var produse = document.getElementsByClassName("produs");
+        for (let produs of produse) {
+            var stil = getComputedStyle(produs);
+            if (stil.display != "none") {
+                maxim = Math.max(
+                    parseFloat(
+                        produs.getElementsByClassName("val-pret")[0].innerHTML
+                    ),
+                    maxim
+                );
+            }
+        }
+        if (!document.getElementById("par_maxim")) {
+            let p = document.createElement("p");
+            p.innerHTML = maxim + " RON";
+            p.id = "par_maxim";
+            let container = document.getElementById("produse");
+            container.insertBefore(p, container.children[0]);
+            setTimeout(function () {
+                let par = document.getElementById("par_maxim");
+                if (par) par.remove();
+            }, 2000);
+        }
+    };
 });

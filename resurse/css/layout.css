@@ -1,17 +1,3 @@
-body {
-    /* --culoare1: #17252a;
-    --culoare2: #2b7a78;
-    --culoare3: #3aafa9;
-    --culoare4: #def2f1;
-    --culoare5: #feffff; */
-    /* --culoare1: rgb(23, 37, 42);
-    --culoare2: rgb(43, 122, 120);
-    --culoare3: rgb(58, 175, 169);
-    --culoare4: rgb(222, 242, 241);
-    --culoare5: rgb(254, 255, 255); */
-    --culoare-umbra: rgb(0 0 0 / 0.3);
-}
-
 #grid-pagina {
     display: grid;
     gap: 15px;

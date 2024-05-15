@@ -23,5 +23,9 @@
     $h5-font-size: 1.4rem,
     $h6-font-size: 1.15rem,
     $font-family-sans-serif: "Montserrat",
-    $body-text-align: justify
+    $body-text-align: justify,
+    $form-range-thumb-active-bg: #2b7a78,
+    $form-range-thumb-width: 1.5rem,
+    $form-range-track-bg: #3aafa9
 );
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";

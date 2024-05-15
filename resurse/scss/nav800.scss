@@ -1,7 +1,6 @@
 #hamburger {
     display: block;
 }
-
 #container-hamburger {
     display: flex;
     height: var(--inaltime-meniu);
@@ -10,77 +9,65 @@
     flex-direction: column;
     justify-content: space-around;
 }
-
 .linie-hamburger {
     border: 1.75px solid white;
 }
-
-#container-hamburger > :nth-child(1) {
-    animation: aparitie_hamburger 1s forwards,
-        animatie_linie 2s forwards calc(1s + 1s * 2 / 10);
+@for $i from 1 through 3 {
+    #container-hamburger > :nth-child(#{$i}) {
+        animation: aparitie_hamburger 1s forwards,
+            animatie_linie 2s forwards calc(1s + calc(#{$i}s * 2 / 10));
+    }
 }
-
-#container-hamburger > :nth-child(2) {
-    animation: aparitie_hamburger 1s forwards,
-        animatie_linie 2s forwards calc(1s + 2s * 2 / 10);
-}
-
-#container-hamburger > :nth-child(3) {
-    animation: aparitie_hamburger 1s forwards,
-        animatie_linie 2s forwards calc(1s + 3s * 2 / 10);
-}
-
 ul.meniu {
     display: none;
     position: absolute;
     width: 100%;
 }
-
 .meniu li:hover {
     box-shadow: 0px 0px 15px 1px var(--culoare-umbra) inset;
     transition: box-shadow 0.5s linear;
 }
-
 #ch-menu:checked + ul.meniu {
     display: block;
     z-index: 2;
     position: relative;
     transform-origin: top left;
     animation: aparitie_meniu_p 1s linear 1 forwards;
-}
-#ch-menu:checked + ul.meniu > li > div,
-#ch-menu:checked + ul.meniu > li > a {
-    z-index: 2;
-    position: relative;
-    transform-origin: 50% 50%;
-    animation-name: aparitie_meniu_p_btn;
-    animation-iteration-count: 1;
-    animation-duration: 0.7s;
-    animation-fill-mode: forwards;
-    animation-timing-function: linear;
-}
 
-nav ul.meniu li {
-    width: 100%;
+    > li > {
+        div,
+        a {
+            z-index: 2;
+            position: relative;
+            transform-origin: 50% 50%;
+            animation-name: aparitie_meniu_p_btn;
+            animation-iteration-count: 1;
+            animation-duration: 0.7s;
+            animation-fill-mode: forwards;
+            animation-timing-function: linear;
+        }
+    }
 }
-nav ul.meniu > li ul {
-    position: absolute;
-    width: 100%;
-    z-index: 200;
-    transform: scale(1, 1) !important;
-    opacity: 1 !important;
+nav ul.meniu {
+    li {
+        width: 100%;
+    }
+    > li ul {
+        position: absolute;
+        width: 100%;
+        z-index: 200;
+        transform: scale(1, 1) !important;
+        opacity: 1 !important;
+    }
 }
-
 #ch-menu:checked + ul.meniu > li ul > * {
     position: relative;
     z-index: 200;
 }
-
 nav ul.meniu > li:hover > ul {
     z-index: 200;
     animation: none;
 }
-
 @keyframes aparitie_meniu_p {
     0% {
         transform: scale(0, 0);
@@ -89,6 +76,7 @@ nav ul.meniu > li:hover > ul {
         transform: scale(1, 1);
     }
 }
+
 @keyframes aparitie_meniu_p_btn {
     0% {
         transform: scale(0, 0);
@@ -97,6 +85,7 @@ nav ul.meniu > li:hover > ul {
         transform: scale(1, 1);
     }
 }
+
 @keyframes aparitie_hamburger {
     0% {
         border: 1.75px solid black;
@@ -114,6 +103,7 @@ nav ul.meniu > li:hover > ul {
         opacity: 1;
     }
 }
+
 @keyframes animatie_linie {
     0% {
         transform: scale(0);
@@ -122,5 +112,3 @@ nav ul.meniu > li:hover > ul {
         transform: scale(1);
     }
 }
-
-/*# sourceMappingURL=nav800.css.map */

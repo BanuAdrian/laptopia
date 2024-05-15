@@ -1,37 +1,41 @@
 <!DOCTYPE html>
-<html  lang="ro">
-    <head>
-        <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
-        <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
-        
-        <title>Cofetăria Dulcelind - home</title>
-        <%- include("../fragmente/head") %>     
-        <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
-    </head>
-    <body>
-    <%- include("../fragmente/header") %>
+<html lang="ro">
 
-    <main>
-        <section>
-            <h2>Pagină produs</h2>
-                <article id="art-produs">
-                    <h3><span class="nume"><%- locals.prod.nume %></span></h3>
-                    <p>Pret: <span class="pret"><%- locals.prod.pret %> </span></p>
-                    <p>Descriere: <span class="descriere"><%- locals.prod.descriere %> </span></p>
-                    <p>Ingrediente: <span class="ingrediente"><%- locals.prod.ingrediente %> </span></p>
-                    <p>Calorii: <span class="calorii"><%- locals.prod.calorii %> </span></p>
-                    <p>Gramaj: <span class="gramaj"><%- locals.prod.gramaj %> </span></p>
-                    <p>Categorie: <span class="categorie"><%- locals.prod.categorie %> </span></p>
-                    <p>Pentru diabetici: <span class="pt_diabetici"><%- locals.prod.pt_diabetici %> </span></p>
-                    <p>Data adăugare: <span class="categorie"><%- locals.prod.data_adaugare %> </span></p>
-                    <figure class="imag-produs">
-                        <img  src="/resurse/imagini/produse/<%- locals.prod.imagine %>" alt="[imagine <%- locals.prod.nume %>]" />
-                    </figure>    
-                </article>
-            
-        </section>
-    </main>
+<head>
+	<meta name="description" content="Adaptează-ți stilul de viață digital cu selecția noastră exclusivă de laptopuri!">
+	<meta name="keywords" content="laptop, laptopuri, leptop, magazin de laptopuri, laptopuri online, laptopuri ieftine, laptop copii, notebook, ultrabook, macbook, laptopia, gaming, macos, windows, acer, apple, asus, dell, hp, lenovo, msi, transport la domiciliu, plata ramburs, plata card, romania" />
 
-    <%- include("../fragmente/footer") %>
-    </body>
+	<title>Produse - Laptopia.ro</title>
+	<%- include("../fragmente/head") %>
+	<link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+	<%- include("../fragmente/header") %>
+
+	<main>
+		<section>
+			<h2>Pagină produs</h2>
+			<article id="art-produs">
+				<h3><span class="nume"><%- locals.prod.nume %></span></h3>
+				<p class="pret"><b class="nume-caracteristica">Pret</b>: <span class="val-pret"><%- prod.pret%></span> RON</p>
+				<p class="categorie"><b class="nume-caracteristica">Categorie</b>: <span class="val-categorie"><%- prod.categorie%></span></p>
+				<p class="brand"><b class="nume-caracteristica">Brand</b>: <span class="val-brand"><%- prod.brand%></span></p>
+				<p class="culoare"><b class="nume-caracteristica">Culoare</b>: <span class="val-culoare"><%- prod.culoare%></span></p>
+				<p class="specificatii"><b class="nume-caracteristica">Specificatii</b>: <span class="val-specificatii"><%- prod.specificatii%></span></p>
+				<p class="descriere"><b class="nume-caracteristica">Descriere</b>: <span class="val-descriere"><%- prod.descriere%></span></p>
+				<p class="resigilat"><b class="nume-caracteristica">Resigilat</b>: <span class="val-resigilat"><%- prod.resigilat%></span></p>
+				<p class="garantie"><b class="nume-caracteristica">Garantie comerciala</b>: <span class="val-garantie"><%- prod.garantie_comerciala%> luni</span></p>
+				<p class="data"><b class="nume-caracteristica">Data adaugarii</b>: <time class="val-data" datetime="15-09-2018" lang="ro"><%- prod.data_adaugare%></time></p>
+				<figure class="imag-produs">
+					<img src="/resurse/imagini/laptopuri/<%- locals.prod.imagine %>" alt="[imagine <%- locals.prod.nume %>]" />
+				</figure>
+			</article>
+
+		</section>
+	</main>
+
+	<%- include("../fragmente/footer") %>
+</body>
+
 </html>

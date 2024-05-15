@@ -1,79 +1,150 @@
-main{
-    --padd-main:1rem;
-    padding-left:var(--padd-main);
-    padding-right:var(--padd-main);
+main {
+    --padd-main: 1rem;
+    padding-left: var(--padd-main);
+    padding-right: var(--padd-main);
 }
 
-.grid-produse{
-    display:grid;
+.grid-produse {
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap:1rem;
+    grid-gap: 2rem;
 }
-.grid-produse .produs{
-    border-radius: 2rem;
-    box-shadow: 0px 0px 0.8rem 0.3rem grey;
+.grid-produse .produs {
+    border-radius: 0.5rem;
+    /* padding: 1rem; */
+    box-shadow: 0px 0px 0.8rem 0.3rem var(--culoare-umbra);
     overflow: hidden;
+    background-color: rgba(0, 0, 0, 0);
 }
 
-.grid-produse .produs h3{
-    background-color: var(--culoare-roz-inchis);
+.grid-produse .produs h5 {
+    background-color: var(--culoare3);
     text-align: center;
     margin-top: 0;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+    /* border: 1px solid red; */
+    /* height: 5vw; */
+    height: 12.5%;
+    padding: 0.5rem;
 }
 
-.grid-produse .produs h3 a{
-    color:black;
+.grid-produse .produs h5 a {
+    color: black;
+    text-decoration: none;
 }
-.grid-produse .produs h3 a:hover{
-    color:white;
+.grid-produse .produs h5 a:hover {
+    color: var(--culoare2);
+    background-size: 0;
 }
-.grid-produse .produs figure{
+.grid-produse .info-prod {
+    display: flex;
+    flex-direction: row;
+}
+.grid-produse .info-prod .first-col {
+    width: 50%;
+    padding: 1rem;
+}
+.grid-produse .info-prod .second-col {
+    width: 50%;
+    padding: 1rem;
+}
+.nume-caracteristica {
+    background-color: var(--culoare3);
+}
+
+#container-inputuri {
+    padding: 0.5rem;
+    background-color: var(--culoare4);
+    outline: 0.25rem solid var(--culoare2);
+    border: 0.25rem solid var(--culoare3);
+    border-radius: 10px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#container-inputuri > * {
+    /* border: 1px solid red; */
+    /* margin: 0.75rem; */
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+#container-butoane > * {
+    margin: 0.5rem;
+    margin-left: 0;
+}
+
+/* .grid-produse .produs figure {
     text-align: center;
 }
-.grid-produse .produs figure img{
-    border:1px solid grey
+.grid-produse .produs figure img {
+    border: 1px solid grey;
 }
-.grid-produse .produs .info-prod{
-    display:flex;
+.grid-produse .produs .info-prod {
+    display: flex;
     background-color: var(--cl-marcare);
 }
-.grid-produse .produs .info-prod p{
-    width:30%;
-    text-align:center;
-    font-weight:bold;
+.grid-produse .produs .info-prod p {
+    width: 30%;
+    text-align: center;
+    font-weight: bold;
 }
 
-.grid-produse .produs p.categorie{
-
-    text-align:center;
-    font-weight:bold;
+.grid-produse .produs p.categorie {
+    text-align: center;
+    font-weight: bold;
 }
 
-.info-produse{
+.info-produse {
     background-color: var(--cl-marcare);
-    padding:0.2rem;
+    padding: 0.2rem;
     box-shadow: 0px 0px 0.5rem 0.15rem grey;
-}
+} */
 
-.produs{
+.produs {
     position: relative;
 }
-.selecteaza-cos{
+
+.selecteaza-cos {
     display: inline-block;
     background-color: var(--culoare-mov);
-    position:absolute;
-    bottom:0.5rem;
-    right:0.5rem;
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
     border-radius: 0.5rem;
     text-align: center;
-    padding:0.3rem;
-    border:1px solid transparent;
+    padding: 0.3rem;
+    border: 1px solid transparent;
 }
 
-.selecteaza-cos:hover{
+.selecteaza-cos:hover {
     background-color: var(--cl-marcare);
-    
-    border:1px solid  var(--culoare-mov);
+
+    border: 1px solid var(--culoare-mov);
+}
+
+@media screen and (max-width: 800px) {
+    .span-buton {
+        display: none;
+    }
+    #container-butoane br {
+        display: none;
+    }
+    #inp-descriere {
+        width: 24vw;
+    }
+    #produse {
+        font-size: 0.5em;
+    }
+    #produse h5 {
+        font-size: 1.5em;
+    }
+    #container-inputuri {
+        font-size: 0.75em;
+    }
+    #container-inputuri > * {
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+    }
 }

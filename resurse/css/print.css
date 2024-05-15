@@ -1,3 +1,7 @@
+#watermark {
+    display: none;
+}
+
 @media print {
     img,
     video,
@@ -32,7 +36,8 @@
         box-shadow: none;
         padding: 1em;
     }
-    a {
+    a,
+    a:visited {
         text-decoration: none;
         color: black;
     }
@@ -102,6 +107,12 @@
         right: 175px;
         color: rgba(0, 0, 0, 0.3);
     }
+    #trending-now h3,
+    #imagine-duotone,
+    #galerie-animata,
+    #galerie-statica {
+        display: none;
+    }
 }
 
 @page {
@@ -113,7 +124,6 @@
 @page: left {
     margin-left: 2cm;
     margin-right: 1cm;
-    border-radius: 20cm;
 }
 @page: right {
     margin-right: 2cm;

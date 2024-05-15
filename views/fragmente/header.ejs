@@ -1,6 +1,14 @@
 <div id="header">
 	<header>
+
+		<div id="container-schimba-tema">
+			<button class="form-control form-control-sm" id="schimba_tema"><i id="icon-tema" class="bi bi-sun-fill"></i></button>
+			<div id="container-switch" class="form-check form-switch">
+				<input id="switch-tema" class="form-check-input" type="checkbox" role="switch">
+			</div>
+		</div>
 		<h1 id="titlu-site">LAPTOPIA.ro</h1>
+		<script src="/resurse/js/tema.js"></script>
 	</header>
 	<nav>
 		<label id="hamburger" for="ch-menu">
@@ -34,7 +42,19 @@
 					<li><a href="/index#faq">ÎNTREBĂRI FRECVENTE</a></li>
 				</ul>
 			</li>
-			<li><a href="/produse">PRODUSE</a></li>
+			<li>
+				<div>PRODUSE</div>
+				<ul>
+					<li>
+						<a href="/produse">TOATE</a>
+					</li>
+					<% for (let opt of locals.optiuniMeniu) { %>
+					<li>
+						<a href="/produse/?tip=<%- opt.unnest %>"><%- opt.unnest.toUpperCase() %></a>
+					</li>
+					<% } %>
+				</ul>
+			</li>
 			<li>
 				<div>INFORMAȚII</div>
 				<ul>

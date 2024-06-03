@@ -1,0 +1,16 @@
+<% if(!locals.utilizator) { %>
+<form id="form_inreg" method="post" class="date" action="/login" enctype="multipart/form-data">
+	<p>
+		<label>
+			Username: <input type="text" name="username" id="inp-username" value="" required pattern="[A-Za-z0-9]+">
+		</label>
+	</p>
+	<p>
+		<label>
+			Parola: <input id="parl" type="password" required name="parola" value="">
+		</label>
+	</p>
+	<p><input type="submit" value="Logare"></p>
+</form>
+<% }  %>
+<p><%- locals.mesajLogin %></p>

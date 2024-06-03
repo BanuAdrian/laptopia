@@ -56,7 +56,8 @@ html {
 /* DESIGN RUDIMENTAR */
 
 body {
-    --spatiere: 60px;
+    --spatiere: 4rem;
+    /* --spatiere: 60px; */
     padding-left: var(--spatiere);
     padding-right: var(--spatiere);
 }
@@ -492,4 +493,44 @@ footer a:active {
     /* display: block; */
     /* width: 10px; */
     /* height: 5px;  */
+}
+
+/* STILIZARE BANNER */
+
+#banner {
+    position: fixed;
+    /* border: 2px solid black; */
+    border-radius: 10px;
+    background-color: var(--culoare4);
+    box-shadow: 0px 0px 0.8rem 0.3rem var(--culoare-umbra);
+    width: 25vw;
+    height: 25vw;
+    bottom: 0.5em;
+    opacity: 0.75;
+    left: 1.9em;
+    padding-top: 6vw;
+    text-align: center;
+    font-size: 2.5vw;
+    transform-origin: bottom left;
+    animation: animatie-banner 5s linear forwards;
+}
+
+@keyframes animatie-banner {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+        background-color: var(--culoare3);
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #banner {
+        animation: none;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #banner {
+        animation: none;
+    }
 }

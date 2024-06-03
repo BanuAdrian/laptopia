@@ -1,0 +1,9 @@
+<% if(locals?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)) { %>
+    <li><div>Administrare</div>
+        <ul>
+            <li><a href="/useri">Useri</a></li>
+            <li><a href="/grafice">Grafice</a></li>
+            <li><a href="/comenzi">Comenzi</a></li>
+        </ul>
+    </li>
+<% } %>

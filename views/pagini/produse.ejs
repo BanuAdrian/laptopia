@@ -8,6 +8,7 @@
 	<title>Produse - Laptopia.ro</title>
 	<%- include("../fragmente/head") %>
 	<script type="text/javascript" src=/resurse/js/produse.js></script>
+	<script type="text/javascript" src=/resurse/js/produse-cos.js></script>
 
 </head>
 
@@ -177,19 +178,28 @@
 								</figure>
 								<p class="descriere"><b class="nume-caracteristica">Descriere</b>: <span class="val-descriere"><%- prod.descriere%></span></p>
 							</div>
-							<div class="second-col">
-								<p class="pret"><b class="nume-caracteristica">Pret</b>: <span class="val-pret"><%- prod.pret%></span> RON</p>
-								<p class="brand"><b class="nume-caracteristica">Brand</b>: <span class="val-brand"><%- prod.brand%></span></p>
-								<p class="culoare"><b class="nume-caracteristica">Culoare</b>: <span class="val-culoare"><%- prod.culoare%></span></p>
-								<p class="specificatii"><b class="nume-caracteristica">Specificatii</b>: <span class="val-specificatii"><%- prod.specificatii%></span></p>
-								<p class="data"><b class="nume-caracteristica">Data adaugarii</b>: <time class="val-data" datetime="15-09-2018" lang="ro"><%- prod.data_adaugare%></time></p>
-								<p class="resigilat"><b class="nume-caracteristica">Resigilat</b>: <span class="val-resigilat"><%- prod.resigilat%></span></p>
+							<div class="accordion second-col" id="accordion-second-col<%- prod.id %>">
+								<h2 class="accordion-header" id="h2-accordion<%- prod.id %>">
+									<button id="afiseaza-detalii<%- prod.id %>" class="btn btn-secondary accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#container-accordion-body<%- prod.id %>" aria-expanded="false" aria-controls="container-accordion-body<%- prod.id %>">
+										Afiseaza detalii
+									</button>
+								</h2>
+								<div id="container-accordion-body<%- prod.id %>" class="accordion-collapse collapse" aria-labelledby="h2-accordion<%- prod.id %>" data-bs-parent="#accordion-second-col<%- prod.id %>">
+									<div class="accordion-body">
+										<p class="pret"><b class="nume-caracteristica">Pret</b>: <span class="val-pret"><%- prod.pret%></span> RON</p>
+										<p class="brand"><b class="nume-caracteristica">Brand</b>: <span class="val-brand"><%- prod.brand%></span></p>
+										<p class="culoare"><b class="nume-caracteristica">Culoare</b>: <span class="val-culoare"><%- prod.culoare%></span></p>
+										<p class="specificatii"><b class="nume-caracteristica">Specificatii</b>: <span class="val-specificatii"><%- prod.specificatii%></span></p>
+										<p class="data"><b class="nume-caracteristica">Data adaugarii</b>: <time class="val-data" datetime="15-09-2018" lang="ro"><%- prod.data_adaugare%></time></p>
+										<p class="resigilat"><b class="nume-caracteristica">Resigilat</b>: <span class="val-resigilat"><%- prod.resigilat%></span></p>
+									</div>
+								</div>
 							</div>
 						</div>
-						<!-- <label class="selecteaza-cos">
+						<label class="selecteaza-cos">
 							Selectează:<br />
 							<input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-						</label> -->
+						</label>
 				</article>
 				<% }%>
 			</div>

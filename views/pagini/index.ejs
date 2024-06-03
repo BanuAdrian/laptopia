@@ -17,15 +17,13 @@
 		<div id="grid-pagina">
 			<section id="welcome">
 				<div id="titlu-welcome">
-					<%- locals.optiuniMeniu[1].unnest %>
 					<h2>BINE AȚI VENIT!</h2>
 					<div id="titlu-welcome-reflectat">
 						<h2>BINE AȚI VENIT!</h2>
 					</div>
 				</div>
-				<button type="button" class="btn btn-primary btn-lg">
-					Stil-1-mare
-				</button>
+				<%- include("../fragmente/useri-online.ejs") %>
+				<%- include("../fragmente/formular-login.ejs") %>
 				<p>
 					Fiecare <b>laptop</b> pe care îl găsiți pe site-ul
 					nostru reprezintă o poartă către viitorul tehnologic,

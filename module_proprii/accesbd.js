@@ -6,10 +6,17 @@ inca nu am implementat protectia contra SQL injection
 
 const { Client, Pool } = require("pg");
 
+/**
+ * Clasa Singleton pentru accesarea bazei de date
+ *
+ */
 class AccesBD {
     static #instanta = null;
     static #initializat = false;
 
+    /**
+     * Constructor care va arunca o eroare daca clasa a fost deja instantiata
+     */
     constructor() {
         if (AccesBD.#instanta) {
             throw new Error("Deja a fost instantiat");
@@ -20,6 +27,9 @@ class AccesBD {
         }
     }
 
+    /**
+     * Initializează conexiunea locală la baza de date.
+     */
     initLocal() {
         this.client = new Client({
             database: "cti_2024",
@@ -28,14 +38,15 @@ class AccesBD {
             host: "localhost",
             port: 5432,
         });
-        // this.client2= new Pool({database:"laborator",
-        //         user:"irina",
-        //         password:"irina",
-        //         host:"localhost",
-        //         port:5432});
         this.client.connect();
     }
 
+    /**
+     * Returneaza clientul pentru baza de date
+     *
+     * @returns {Client} - clientul pentru baza de date
+     * @throws {Error} - daca clasa nu a fost instantiata
+     */
     getClient() {
         if (!AccesBD.#instanta) {
             throw new Error("Nu a fost instantiata clasa");
@@ -56,7 +67,7 @@ class AccesBD {
      * @returns {AccesBD}
      */
     static getInstanta({ init = "local" } = {}) {
-        console.log(this); //this-ul e clasa nu instanta pt ca metoda statica
+        // console.log(this); //this-ul e clasa nu instanta pt ca metoda statica
         if (!this.#instanta) {
             this.#initializat = true;
             this.#instanta = new AccesBD();
@@ -115,6 +126,19 @@ class AccesBD {
         */
         this.client.query(comanda, parametriQuery, callback);
     }
+
+    /**
+     * @typedef {object} ObiectQuerySelect - obiect primit de functiile care realizeaza un query
+     * @property {string} tabel - numele tabelului
+     * @property {string []} campuri - o lista de stringuri cu numele coloanelor afectate de query; poate cuprinde si elementul "*"
+     * @property {string[]} conditiiAnd - lista de stringuri cu conditii pentru where
+     */
+
+    /**
+     * Selecteaza asincron inregistrari din baza de date
+     *
+     * @param {ObiectQuerySelect} obj - un obiect cu datele pentru query
+     */
     async selectAsync({ tabel = "", campuri = [], conditiiAnd = [] } = {}) {
         let conditieWhere = "";
         if (conditiiAnd.length > 0)
@@ -126,13 +150,32 @@ class AccesBD {
         console.error("selectAsync:", comanda);
         try {
             let rez = await this.client.query(comanda);
-            console.log("selectasync: ", rez);
+            // console.log("selectasync: ", rez);
             return rez;
         } catch (e) {
             console.log(e);
             return null;
         }
     }
+
+    /**
+     * @typedef {object} ObiectQueryInsert - obiect primit de functiile care realizeaza un query
+     * @property {string} tabel - numele tabelului
+     * @property {string []} campuri - o lista de stringuri cu numele coloanelor afectate de query; poate cuprinde si elementul "*"
+     */
+
+    /**
+     * callback pentru queryuri.
+     * @callback QueryCallBack
+     * @param {Error} err Eventuala eroare in urma queryului
+     * @param {Object} rez Rezultatul query-ului
+     */
+    /**
+     * Insereaza inregistrari in baza de date
+     *
+     * @param {ObiectQueryInsert} obj - un obiect cu datele pentru query
+     * @param {function} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
+     */
     insert({ tabel = "", campuri = {} } = {}, callback) {
         /*
         campuri={
@@ -141,38 +184,37 @@ class AccesBD {
             calorii:500
         }
         */
-        console.log("-------------------------------------------");
-        console.log(Object.keys(campuri).join(","));
-        console.log(Object.values(campuri).join(","));
+        // console.log("-------------------------------------------");
+        // console.log(Object.keys(campuri).join(","));
+        // console.log(Object.values(campuri).join(","));
         let comanda = `insert into ${tabel}(${Object.keys(campuri).join(
             ","
         )}) values ( ${Object.values(campuri)
             .map((x) => `'${x}'`)
             .join(",")})`;
-        console.log(comanda);
+        // console.log(comanda);
         this.client.query(comanda, callback);
     }
 
     /**
-     * @typedef {object} ObiectQuerySelect - obiect primit de functiile care realizeaza un query
+     * @typedef {object} ObiectQueryUpdate - obiect primit de functiile care realizeaza un query
      * @property {string} tabel - numele tabelului
      * @property {string []} campuri - o lista de stringuri cu numele coloanelor afectate de query; poate cuprinde si elementul "*"
      * @property {string[]} conditiiAnd - lista de stringuri cu conditii pentru where
      */
-    // update({tabel="",campuri=[],valori=[], conditiiAnd=[]} = {}, callback, parametriQuery){
-    //     if(campuri.length!=valori.length)
-    //         throw new Error("Numarul de campuri difera de nr de valori")
-    //     let campuriActualizate=[];
-    //     for(let i=0;i<campuri.length;i++)
-    //         campuriActualizate.push(`${campuri[i]}='${valori[i]}'`);
-    //     let conditieWhere="";
-    //     if(conditiiAnd.length>0)
-    //         conditieWhere=`where ${conditiiAnd.join(" and ")}`;
-    //     let comanda=`update ${tabel} set ${campuriActualizate.join(", ")}  ${conditieWhere}`;
-    //     console.log(comanda);
-    //     this.client.query(comanda,callback)
-    // }
 
+    /**
+     * callback pentru queryuri.
+     * @callback QueryCallBack
+     * @param {Error} err Eventuala eroare in urma queryului
+     * @param {Object} rez Rezultatul query-ului
+     */
+    /**
+     * Actualizeaza inregistrari din baza de date
+     *
+     * @param {ObiectQueryUpdate} obj - un obiect cu datele pentru query
+     * @param {function} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
+     */
     update(
         { tabel = "", campuri = {}, conditiiAnd = [] } = {},
         callback,
@@ -187,10 +229,30 @@ class AccesBD {
         let comanda = `update ${tabel} set ${campuriActualizate.join(
             ", "
         )}  ${conditieWhere}`;
-        console.log(comanda);
+        // console.log(comanda);
         this.client.query(comanda, callback);
     }
 
+    /**
+     * @typedef {object} ObiectQueryUpdate - obiect primit de functiile care realizeaza un query
+     * @property {string} tabel - numele tabelului
+     * @property {string []} campuri - o lista de stringuri cu numele coloanelor afectate de query; poate cuprinde si elementul "*"
+     * @property {string []} valori - o lista de stringuri cu valorile campurilor
+     * @property {string[]} conditiiAnd - lista de stringuri cu conditii pentru where
+     */
+
+    /**
+     * callback pentru queryuri.
+     * @callback QueryCallBack
+     * @param {Error} err Eventuala eroare in urma queryului
+     * @param {Object} rez Rezultatul query-ului
+     */
+    /**
+     * Actualizeaza inregistrari din baza de date cu valori date separat
+     *
+     * @param {ObiectQueryUpdate} obj - un obiect cu datele pentru query
+     * @param {function} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
+     */
     updateParametrizat(
         { tabel = "", campuri = [], valori = [], conditiiAnd = [] } = {},
         callback,
@@ -207,32 +269,44 @@ class AccesBD {
         let comanda = `update ${tabel} set ${campuriActualizate.join(
             ", "
         )}  ${conditieWhere}`;
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111", comanda);
+        // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111", comanda);
         this.client.query(comanda, valori, callback);
     }
 
-    //TO DO
-    // updateParametrizat({tabel="",campuri={}, conditiiAnd=[]} = {}, callback, parametriQuery){
-    //     let campuriActualizate=[];
-    //     for(let prop in campuri)
-    //         campuriActualizate.push(`${prop}='${campuri[prop]}'`);
-    //     let conditieWhere="";
-    //     if(conditiiAnd.length>0)
-    //         conditieWhere=`where ${conditiiAnd.join(" and ")}`;
-    //     let comanda=`update ${tabel} set ${campuriActualizate.join(", ")}  ${conditieWhere}`;
-    //     this.client.query(comanda,valori, callback)
-    // }
+    /**
+     * @typedef {object} ObiectQueryDelete - obiect primit de functiile care realizeaza un query
+     * @property {string} tabel - numele tabelului
+     * @property {string[]} conditiiAnd - lista de stringuri cu conditii pentru where
+     */
 
+    /**
+     * callback pentru queryuri.
+     * @callback QueryCallBack
+     * @param {Error} err Eventuala eroare in urma queryului
+     * @param {Object} rez Rezultatul query-ului
+     */
+    /**
+     * Sterge inregistrari din baza de date
+     *
+     * @param {ObiectQueryDelete} obj - un obiect cu datele pentru query
+     * @param {function} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
+     */
     delete({ tabel = "", conditiiAnd = [] } = {}, callback) {
         let conditieWhere = "";
         if (conditiiAnd.length > 0)
             conditieWhere = `where ${conditiiAnd.join(" and ")}`;
 
         let comanda = `delete from ${tabel} ${conditieWhere}`;
-        console.log(comanda);
+        // console.log(comanda);
         this.client.query(comanda, callback);
     }
 
+    /**
+     * Apeleaza functia query a obiectului client
+     *
+     * @param {string} comanda - queryul de facut pe baza de date
+     * @param {function} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
+     */
     query(comanda, callback) {
         this.client.query(comanda, callback);
     }

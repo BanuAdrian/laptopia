@@ -1,0 +1,49 @@
+<h2>Calendar</h2>
+<p>Observatie: afiseaza doar luna curentă (evenimentele sunt random)</p>
+<div id="calendar">
+    <div>L</div>
+    <div>Ma</div>
+    <div>Mi</div>
+    <div>J</div>
+    <div>V</div>
+    <div>S</div>
+    <div>D</div>
+<% 
+nrZile=[31,28,31,30,31,30,31,31,30,31,30,31];
+
+d=new Date(); //observatie: este data serverului nu a clinetului; codul ejs fiind compilat pe server
+anCurent=d.getFullYear();
+lunaCurenta=d.getMonth();
+if(anCurent%400==0 || (anCurent%4==0 && anCurent%100!=0)) nrZile[1]=29;
+let nrZileCalendar=nrZile[lunaCurenta]
+let primaZiLuna=new Date(anCurent, lunaCurenta, 1);
+let ultimaZiLuna=new Date(anCurent, lunaCurenta, nrZileCalendar);
+ziSaptPrimaZiLuna=(primaZiLuna.getDay()-1+7)%7;
+ziSaptUltimaZiLuna=(ultimaZiLuna.getDay()-1+7)%7;
+for (let i=0;i<ziSaptPrimaZiLuna;i++){
+    %>
+    <div></div> 
+    <% } 
+
+    
+    for (let i=1;i<=nrZileCalendar;i++){
+    var obiectEvenimente=null;
+        if(locals.evenimente)
+                obiectEvenimente=locals.evenimente.find(function(elem){ return elem.data.valueOf()==new Date(anCurent,lunaCurenta,i).valueOf()})
+        if(obiectEvenimente)
+        {
+        %>
+        <div class="zi eveniment" title="<%= obiectEvenimente.text %>"><%= i %></div> 
+        <%
+        }
+        else{
+    %>
+    <div class="zi"><%= i %></div> 
+    <% } 
+} %>
+</div>
+<%
+dataServer=new Date();
+sirData=dataServer.getHours()+":"+dataServer.getMinutes()+":"+dataServer.getSeconds()
+
+%>

@@ -84,7 +84,7 @@
             "galerie-statica galerie-statica";
     }
     #galerie-animata {
-        display: none;
+        display: none !important;
     }
 }
 
@@ -99,7 +99,7 @@
         margin: 5px;
     }
     #galerie-animata {
-        display: none;
+        display: none !important;
     }
 }
 

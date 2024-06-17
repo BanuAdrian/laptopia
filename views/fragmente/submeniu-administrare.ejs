@@ -1,9 +1,10 @@
 <% if(locals?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)) { %>
-    <li><div>Administrare</div>
-        <ul>
-            <li><a href="/useri">Useri</a></li>
-            <li><a href="/grafice">Grafice</a></li>
-            <li><a href="/comenzi">Comenzi</a></li>
-        </ul>
-    </li>
+<li>
+	<div><i class="bi bi-gear-fill hidden-on-sm"></i> ADMIN</div>
+	<ul class="submeniu">
+		<li><a href="/useri">USERI</a></li>
+		<li><a href="/grafice">GRAFICE</a></li>
+		<li><a href="/comenzi">COMENZI</a></li>
+	</ul>
+</li>
 <% } %>

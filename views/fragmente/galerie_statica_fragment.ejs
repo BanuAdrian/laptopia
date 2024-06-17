@@ -1,0 +1,36 @@
+<section id="galerie-statica">
+	<h2>Galerie</h2>
+	<div id="grid-galerie">
+		<!-- imag.luni?.includes(lunaCurenta) -->
+		<% var d = new Date(); 
+        var oraCurenta = d.getHours();
+        var parteaZilei = ""; 
+        if (oraCurenta > 5 && oraCurenta < 12)
+            parteaZilei = "dimineata";
+        else if (oraCurenta >= 12 && oraCurenta <= 20)
+            parteaZilei = "zi";
+        else
+            parteaZilei = "noapte";
+        console.log("ora curenta este " + oraCurenta); 
+        var index = 0; 
+        var nrImgCriteriu = 0;
+        for (let imag of locals.imagini) 
+            if (imag.timp?.includes(parteaZilei))
+                nrImgCriteriu++;
+        nrImgCriteriu = parseInt(nrImgCriteriu / 3) * 3;
+        // console.log("Nr de imagini care indeplinesc criteriul: " + nrImgCriteriu);
+        for (let imag of locals.imagini) 
+        { if (imag.timp?.includes(parteaZilei))
+        { index++;%>
+		<% if (index > nrImgCriteriu) break; if (index == 2 && parteaZilei == "zi") {%> <p id="text-atribuire"> Designed by <a href="https://<%- locals.link_atribuire %>"><%- locals.link_atribuire%></a></p> <% } %>
+		<figure id="imagine-galerie-<%= index %>">
+			<picture>
+				<source srcset="<%= imag.fisier_mediu %>" media="(max-width:1200px)" />
+				<img src="<%= imag.fisier %>" alt="<%= imag.nume %>" title="<%= imag.descriere %>" />
+			</picture>
+			<!-- <img src="<%= imag.fisier %>" alt="briose" /> -->
+			<figcaption><%= imag.descriere %></figcaption>
+		</figure>
+		<% } %> <% } %>
+	</div>
+</section>

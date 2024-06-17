@@ -1,8 +1,9 @@
 <% if(locals.utilizator) { %>
-    <li><div><%- locals.utilizator.username %></div>
-        <ul>
-            <li><a href="/profil">Profil</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </li>
-<% } %>
+<li>
+	<div><i class="bi bi-person-square hidden-on-sm"></i> <%- locals.utilizator.username.toUpperCase() %></div>
+	<ul id="submeniu-user" class="submeniu">
+		<li><a href="/profil">PROFIL</a></li>
+		<li><a href="/logout">LOGOUT</a></li>
+	</ul>
+</li>
+<% }  %>

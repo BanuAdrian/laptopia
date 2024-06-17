@@ -1,33 +1,39 @@
 $nrimag: <%- locals.nrimag %>;
 
+#galerie-animata {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#galerie-animata h2 {
+    align-self: flex-start;
+    margin-bottom: 2rem;
+}
+
 .container-galerie-animata {
-    width: 400px;
-    height: 300px;
+    position: relative;
+    width: 40%;
+    height: 25vw;
     border: 5px solid red;
     border-image: url("../imagini/border-image.jpg") 1;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 5rem;
-    margin-left: 25rem;
     overflow: hidden;
 }
 
 .container-galerie-animata figcaption {
     position: absolute;
-    bottom: 10px;
+    bottom: 0px;
     background: rgba(255, 255, 255, 0.7);
     width: 100%;
     text-align: center;
+    color: var(--culoare2);
 }
 
 .container-galerie-animata figure {
-    position: relative;
-    width: 400px;
-    height: 300px;
-}
-
-#galerie-animata figure {
     position: absolute;
+    width: 100%;
+    height: 100%;
     left: 0;
     top: 0;
     z-index: 0;
@@ -39,7 +45,11 @@ $nrimag: <%- locals.nrimag %>;
     transform-origin: center center;
 }
 
-#galerie-animata figure:hover {
+.container-galerie-animata img {
+    height: 25vw;
+}
+
+.container-galerie-animata:hover > figure {
     animation-play-state: paused;
 }
 

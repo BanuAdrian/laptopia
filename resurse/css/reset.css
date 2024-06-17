@@ -107,7 +107,6 @@ tt,
 var,
 b,
 u,
-i,
 center,
 dl,
 dt,
@@ -171,10 +170,10 @@ section {
 body {
     line-height: 1;
 }
-ol,
+/* ol,
 ul {
     list-style: none;
-}
+} */
 table {
     border-collapse: collapse;
     border-spacing: 0;

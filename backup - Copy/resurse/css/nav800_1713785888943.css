@@ -27,15 +27,10 @@
   animation: aparitie_hamburger 1s forwards, animatie_linie 2s forwards calc(1s + 3s * 2 / 10);
 }
 
-.meniu {
-  background-color: var(--culoare2);
-}
-
 ul.meniu {
   display: none;
   position: absolute;
   width: 100%;
-  font-size: 1rem;
 }
 
 .meniu li:hover {
@@ -67,7 +62,7 @@ nav ul.meniu li {
 }
 nav ul.meniu > li ul {
   position: absolute;
-  width: 100% !important;
+  width: 100%;
   z-index: 200;
   transform: scale(1, 1) !important;
   opacity: 1 !important;
@@ -123,7 +118,4 @@ nav ul.meniu > li:hover > ul {
   100% {
     transform: scale(1);
   }
-}
-.hidden-on-sm {
-  display: none;
 }

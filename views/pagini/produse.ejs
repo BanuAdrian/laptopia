@@ -7,8 +7,8 @@
 	<link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
 	<title>Produse - Laptopia.ro</title>
 	<%- include("../fragmente/head") %>
-	<script type="text/javascript" src=/resurse/js/produse.js></script>
-	<script type="text/javascript" src=/resurse/js/produse-cos.js></script>
+	<script type="module" src="/resurse/js/produse.js"></script>
+	<script type="text/javascript" src="/resurse/js/produse-cos.js"></script>
 
 </head>
 
@@ -36,11 +36,14 @@
 							<input list="culori-laptop" id="inp-culoare" name="inp-culoare" class="form-control" />
 							<label id="label-culoare-invalida" for="inp-culoare"></label>
 							<datalist id="culori-laptop">
-								<option value="gri"></option>
+								<% for (let culoare of locals.culori) { %>
+								<option value="<%- culoare.culoare %>"><%- culoare.culoare %> </option>
+								<% } %>
+								<!-- <option value="gri"></option>
 								<option value="alb"></option>
 								<option value="negru"></option>
 								<option value="argintiu"></option>
-								<option value="albastru"></option>
+								<option value="albastru"></option> -->
 							</datalist>
 						</div>
 					</label>
@@ -62,11 +65,11 @@
 					<!-- RESIGILAT -->
 					<b>Resigilat:</b><br>
 					<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-					<input class="btn-check" id="i_rad1" name="gr_rad" value="true" type="radio" autocomplete="off" />
-					<label class="btn btn-sm btn-outline-primary" for="i_rad1">Da</label>
-
-					<input class="btn-check" id="i_rad2" name="gr_rad" value="false" type="radio" autocomplete="off" />
-					<label class="btn btn-sm btn-outline-primary" for="i_rad2">Nu</label>
+					<% let cntResig = 1; 
+					for (let resigilat of locals.resigilat) { %>
+					<input class="btn-check" id="i_rad<%-cntResig%>" name="gr_rad" value="<%-resigilat.resigilat == true ? "Da" : "Nu"%>" type="radio" autocomplete="off" />
+					<label class="btn btn-sm btn-outline-primary" for="i_rad<%-cntResig%>"><%-resigilat.resigilat == true ? "Da" : "Nu"%></label>
+					<% cntResig++;} %>
 
 					<input class="btn-check" id="i_rad3" name="gr_rad" value="toate" type="radio" autocomplete="off" checked />
 					<label class="btn btn-sm btn-outline-primary" for="i_rad3">Toate</label>
@@ -76,29 +79,11 @@
 					<!-- BRAND -->
 					<b>Brand:</b><br>
 					<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-					<input class="btn-check" id="i_check1" checked name="gr_check" value="HP" type="checkbox" />
-					<label class="btn btn-sm btn-outline-primary" for="i_check1">HP</label>
-
-					<input class="btn-check" id="i_check2" checked name="gr_check" value="MSI" type="checkbox" />
-					<label class="btn btn-sm btn-outline-primary" for="i_check2">MSI</label>
-
-					<input class="btn-check" id="i_check3" checked name="gr_check" value="Dell" type="checkbox" />
-					<label class="btn btn-sm btn-outline-primary" for="i_check3">Dell</label>
-
-					<input class="btn-check" id="i_check4" checked name="gr_check" value="ASUS" type="checkbox" />
-					<label class="btn btn-sm btn-outline-primary" for="i_check4">ASUS</label>
-
-					<input class="btn-check" id="i_check5" checked name="gr_check" value="ACER" type="checkbox" />
-					<label class="btn btn-sm btn-outline-primary" for="i_check5">ACER</label>
-
-					<input class="btn-check" id="i_check6" checked name="gr_check" value="Apple" type="checkbox" />
-					<label class="btn btn-sm btn-outline-primary" for="i_check6">Apple</label>
-
-					<input class="btn-check" id="i_check7" checked name="gr_check" value="Lenovo" type="checkbox" />
-					<label class="btn btn-sm btn-outline-primary" for="i_check7">Lenovo</label>
-
-					<input class="btn-check" id="i_check8" checked name="gr_check" value="Microsoft" type="checkbox" />
-					<label class="btn btn-sm btn-outline-primary" for="i_check8">Microsoft</label>
+					<% let cnt = 1; 
+					for (let brand of locals.branduri) { %>
+					<input class="btn-check" id="i_check<%- cnt%>" checked name="gr_check" value="<%- brand.brand %>" type="checkbox" />
+					<label class="btn btn-sm btn-outline-primary" for="i_check<%- cnt%>"><%- brand.brand %></label>
+					<% cnt++;} %>
 				</div>
 				<!-- ------- -->
 			</div>
@@ -109,10 +94,9 @@
 					<label><b>Categorie:</b><br>
 						<select class="form-control" id="inp-categorie">
 							<option id="sel-toate" selected value="toate">toate</option>
-							<% for (let opt of locals.optiuni) { %>
-							<option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
+							<% for (let categorie of locals.optiuni) { %>
+							<option value="<%- categorie.categorie %>"><%- categorie.categorie %> </option>
 							<% } %>
-							<!-- for-ul asta pt meniul de la ex 4 doar modificam putin -->
 						</select>
 					</label>
 					<!-- --------- -->
@@ -121,26 +105,9 @@
 					<!-- VALORI NEDORITE -->
 					<label><b>Selectați valorile pe care NU le doriți:</b><br>
 						<select class="form-control" id="inp-valori-nedorite" multiple>
-							<option value="AMD Ryzen"> AMD Ryzen</option>
-							<option value="Intel Core i5"> Intel Core i5</option>
-							<option value="Intel Core i7"> Intel Core i7</option>
-							<option value="13 inch"> 13 inch</option>
-							<option value="13.3 inch"> 13.3 inch</option>
-							<option value="13.6 inch"> 13.6 inch</option>
-							<option value="14 inch"> 14 inch</option>
-							<option value="14.5 inch"> 14.5 inch</option>
-							<option value="15.6 inch"> 15.6 inch</option>
-							<option value="16 inch"> 16 inch</option>
-							<option value="8GB RAM"> 8GB RAM</option>
-							<option value="16GB RAM"> 16GB RAM</option>
-							<option value="SSD 256GB"> SSD 256GB</option>
-							<option value="SSD 512GB"> SSD 512GB</option>
-							<option value="SSD 1TB"> SSD 1TB</option>
-							<option value="Windows"> Windows</option>
-							<option value="Free DOS"> Free DOS</option>
-							<option value="Ubuntu"> Ubuntu</option>
-							<option value="macOS"> macOS</option>
-							<!-- for-ul asta pt meniul de la ex 4 doar modificam putin -->
+							<% for (let spec of locals.specs) { %>
+							<option value="<%- spec.specs %>"><%- spec.specs %> </option>
+							<% } %>
 						</select>
 					</label>
 					<!-- -------- -->
@@ -148,7 +115,7 @@
 				<div class="col-4">
 					<!-- PRET -->
 					<label><b>Pret:</b><br>
-						<input class="form-range" type="range" id="inp-pret" value="899" min="899" max="10799"> <span id="infoRange">(899)</span>
+						<input class="form-range" type="range" id="inp-pret" value="<%- preturi[0].min%>" min="<%- preturi[0].min%>" max="<%- preturi[0].max%>"> <span id="infoRange">(<%- preturi[0].min%>)</span>
 					</label>
 					<!-- ---- -->
 				</div>
@@ -162,47 +129,80 @@
 				<button id="sortDescrescBrand" class="btn btn-primary btn-sm btn-border-radius-sm"><i class="bi bi-sort-down"></i><span class="span-buton"> Sorteaza descrescator dupa brand si pret</span></button><br>
 				<button id="calculeazaMaxim" class="btn btn-primary btn-sm btn-border-radius-sm"><i class="bi bi-calculator-fill"></i><span class="span-buton"> Calculeaza maximul preturilor produselor afisate</span></button>
 			</div>
+
+			<label class="salveaza-filtre">
+				Salveaza filtre:<br />
+				<input type="checkbox" id="ckbox-filtre" class="form-check-input" autocomplete="off">
+			</label>
 			<!-- ------- -->
 		</div>
 		<section id="produse">
 			<h2>Produse</h2>
-			<div class="grid-produse">
-				<% for( let prod of locals.produse) { %>
-				<article class="produs">
-					<h5 class="nume"><b class="nume-caracteristica">Nume</b>: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%- prod.nume%></span></a></h3>
-						<div class="info-prod">
-							<div class="first-col">
-								<p class="categorie"><b class="nume-caracteristica">Categorie</b>: <span class="val-categorie"><%- prod.categorie%></span></p>
-								<figure>
-									<a href="/produs/<%-prod.id %>"><img src="/resurse/imagini/laptopuri/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
-								</figure>
-								<p class="descriere"><b class="nume-caracteristica">Descriere</b>: <span class="val-descriere"><%- prod.descriere%></span></p>
-							</div>
-							<div class="accordion second-col" id="accordion-second-col<%- prod.id %>">
-								<h2 class="accordion-header" id="h2-accordion<%- prod.id %>">
-									<button id="afiseaza-detalii<%- prod.id %>" class="btn btn-secondary accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#container-accordion-body<%- prod.id %>" aria-expanded="false" aria-controls="container-accordion-body<%- prod.id %>">
-										Afiseaza detalii
-									</button>
-								</h2>
-								<div id="container-accordion-body<%- prod.id %>" class="accordion-collapse collapse" aria-labelledby="h2-accordion<%- prod.id %>" data-bs-parent="#accordion-second-col<%- prod.id %>">
-									<div class="accordion-body">
-										<p class="pret"><b class="nume-caracteristica">Pret</b>: <span class="val-pret"><%- prod.pret%></span> RON</p>
-										<p class="brand"><b class="nume-caracteristica">Brand</b>: <span class="val-brand"><%- prod.brand%></span></p>
-										<p class="culoare"><b class="nume-caracteristica">Culoare</b>: <span class="val-culoare"><%- prod.culoare%></span></p>
-										<p class="specificatii"><b class="nume-caracteristica">Specificatii</b>: <span class="val-specificatii"><%- prod.specificatii%></span></p>
-										<p class="data"><b class="nume-caracteristica">Data adaugarii</b>: <time class="val-data" datetime="15-09-2018" lang="ro"><%- prod.data_adaugare%></time></p>
-										<p class="resigilat"><b class="nume-caracteristica">Resigilat</b>: <span class="val-resigilat"><%- prod.resigilat%></span></p>
+			<h4 id="msg-produse">Nu exista produse conform filtrarii curente!</h2>
+				<div class="grid-produse">
+					<% for( let prod of locals.produse) { %>
+					<article id="produs-<%- prod.id %>" class="produs">
+						<h5 class="nume"><b class="nume-caracteristica">Nume</b>: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%- prod.nume%></span></a>
+							</h3>
+							<div class="info-prod" data-bs-toggle="modal" data-bs-target="#modal-<%- prod.id %>">
+								<div class="first-col">
+									<p class="categorie"><b class="nume-caracteristica">Categorie</b>: <span class="val-categorie"><%- prod.categorie%></span></p>
+									<figure>
+										<a href="/produs/<%-prod.id %>"><img src="/resurse/imagini/laptopuri/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
+									</figure>
+									<p class="descriere"><b class="nume-caracteristica">Descriere</b>: <span class="val-descriere"><%- prod.descriere%></span></p>
+								</div>
+								<div class="accordion second-col" id="accordion-second-col<%- prod.id %>">
+									<h2 class="accordion-header" id="h2-accordion<%- prod.id %>">
+										<button id="afiseaza-detalii<%- prod.id %>" class="btn btn-secondary accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#container-accordion-body<%- prod.id %>" aria-expanded="false" aria-controls="container-accordion-body<%- prod.id %>">
+											Afiseaza detalii
+										</button>
+									</h2>
+									<div id="container-accordion-body<%- prod.id %>" class="accordion-collapse collapse" aria-labelledby="h2-accordion<%- prod.id %>" data-bs-parent="#accordion-second-col<%- prod.id %>">
+										<div class="accordion-body">
+											<p class="pret"><b class="nume-caracteristica">Pret</b>: <span class="val-pret"><%- prod.pret%></span> RON</p>
+											<p class="brand"><b class="nume-caracteristica">Brand</b>: <span class="val-brand"><%- prod.brand%></span></p>
+											<p class="culoare"><b class="nume-caracteristica">Culoare</b>: <span class="val-culoare"><%- prod.culoare%></span></p>
+											<p class="specificatii"><b class="nume-caracteristica">Specificatii</b>: <span class="val-specificatii"><%- prod.specificatii%></span></p>
+											<p class="data"><b class="nume-caracteristica">Data adaugarii</b>: <time class="val-data" datetime="15-Septembrie-2018" lang="ro"><%- prod.data_adaugare.getDay()%>-<%-prod.data_adaugare.toLocaleString('ro', {month: 'long'})%>-<%-prod.data_adaugare.getFullYear()%>[<%-prod.data_adaugare.toLocaleString('ro', {weekday: 'long'})%>]</time></p>
+											<p class="resigilat"><b class="nume-caracteristica">Resigilat</b>: <span class="val-resigilat"><%- prod.resigilat == true ? "Da" : "Nu"%></span></p>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<label class="selecteaza-cos">
-							Selectează:<br />
-							<input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-						</label>
-				</article>
-				<% }%>
-			</div>
+							<div class="modal modal-lg fade" id="modal-<%- prod.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h3 class="modal-title"><span class="nume"><%- prod.nume %></span></h3>
+										</div>
+										<div class="modal-body">
+											<p class="pret"><b class="nume-caracteristica">Pret</b>: <span class="val-pret"><%- prod.pret%></span> RON</p>
+											<p class="categorie"><b class="nume-caracteristica">Categorie</b>: <span class="val-categorie"><%- prod.categorie%></span></p>
+											<p class="brand"><b class="nume-caracteristica">Brand</b>: <span class="val-brand"><%- prod.brand%></span></p>
+											<p class="culoare"><b class="nume-caracteristica">Culoare</b>: <span class="val-culoare"><%- prod.culoare%></span></p>
+											<p class="specificatii"><b class="nume-caracteristica">Specificatii</b>: <span class="val-specificatii"><%- prod.specificatii%></span></p>
+											<p class="descriere"><b class="nume-caracteristica">Descriere</b>: <span class="val-descriere"><%- prod.descriere%></span></p>
+											<p class="resigilat"><b class="nume-caracteristica">Resigilat</b>: <span class="val-resigilat"><%- prod.resigilat == true ? "Da" : "Nu"%></span></p>
+											<p class="garantie"><b class="nume-caracteristica">Garantie comerciala</b>: <span class="val-garantie"><%- prod.garantie_comerciala%> luni</span></p>
+											<p class="data"><b class="nume-caracteristica">Data adaugarii</b>: <time class="val-data" datetime="15-Septembrie-2018" lang="ro"><%- prod.data_adaugare.getDay()%>-<%-prod.data_adaugare.toLocaleString('ro', {month: 'long'})%>-<%-prod.data_adaugare.getFullYear()%>[<%-prod.data_adaugare.toLocaleString('ro', {weekday: 'long'})%>]</time></p>
+											<figure class="imag-produs">
+												<img src="/resurse/imagini/laptopuri/<%- prod.imagine %>" alt="[imagine <%- prod.nume %>" />
+											</figure>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Inchide</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<label class="selecteaza-cos">
+								Selectează:<br />
+								<input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
+							</label>
+					</article>
+					<% }%>
+				</div>
 		</section>
 	</main>
 

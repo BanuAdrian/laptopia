@@ -7,6 +7,7 @@ body {
     --culoare4: #def2f1;
     --culoare5: #feffff;
     --culoare-umbra: rgb(0 0 0 / 0.3);
+    --culoare-modal: white;
 }
 
 body.dark {
@@ -15,8 +16,11 @@ body.dark {
     --culoare1: #def2f1;
     --culoare2: #092635;
     --culoare3: #1b4242;
-    --culoare4: #5c8374;
-    --culoare5: #9ec8b9;
+    /* --culoare4: #5c8374; */
+    --culoare4: #3f4e4f;
+    /* --culoare5: #9ec8b9; */
+    --culoare5: #9db2bf;
+    --culoare-modal: #3f4e4f;
     --culoare-bg: black;
     --culoare-umbra: #2b7a78;
     --culoare-text: white;
@@ -77,6 +81,10 @@ strong {
 #header h1,
 #welcome h2 {
     margin-bottom: 1em;
+}
+
+#titlu-site {
+    text-shadow: var(--culoare5) 0px 0px 5px, var(--culoare1) 0px 0px 10px;
 }
 
 .intro-livrare p {
@@ -398,7 +406,7 @@ footer a:active {
     background-size: cover;
     width: 500px;
     height: 500px;
-    filter: brightness(200%) grayscale(0);
+    filter: brightness(200%);
     transition: all 2s linear;
     border-radius: 30px;
     box-shadow: 5px 0px 20px black;

@@ -29,7 +29,7 @@ client.connect();
 // client.query(
 //     "select * from unnest(enum_range(null::categorie_laptopuri))",
 //     function (err, rez) {
-//         console.log(rez);
+//         console.log(rez.rows);
 //     }
 // );
 
@@ -108,12 +108,20 @@ app.get(["/", "/index", "/home"], async function (req, res) {
     });
 });
 
+app.get("/galerie-statica", async function (req, res) {
+    res.render("pagini/galerie_statica.ejs", {
+        imagini: obGlobal.obImagini.imagini,
+        link_atribuire: obGlobal.linkAtribuireImagini.link_freepik,
+    });
+});
+
 app.get("*/galerie-animata.css", function (req, res) {
     var sirScss = fs
         .readFileSync(
             path.join(__dirname, "resurse/scss-ejs/galerie_animata.scss")
         )
         .toString("utf8");
+    // (0:5) + 6 = (6:11)/2 = (3 : 5) * 2 = (6 : 10)
     var numarImagini = Math.floor((Math.floor(Math.random() * 5) + 6) / 2) * 2;
     console.log("Numarul de poze: " + numarImagini);
     rezScss = ejs.render(sirScss, { nrimag: numarImagini });
@@ -208,7 +216,8 @@ app.get("/produse", function (req, res) {
         conditieQuery = ` where categorie='${req.query.tip}'`;
     }
     client.query(
-        "select * from unnest(enum_range(null::categorie_laptopuri))",
+        // "select * from unnest(enum_range(null::categorie_laptopuri))",
+        "select distinct categorie from laptopuri order by categorie asc",
         function (err, rezOptiuni) {
             client.query(
                 `select * from laptopuri ${conditieQuery}`,
@@ -217,10 +226,51 @@ app.get("/produse", function (req, res) {
                         console.log(err);
                         afisareEroare(res, 2);
                     } else {
-                        res.render("pagini/produse", {
-                            produse: rez.rows,
-                            optiuni: rezOptiuni.rows,
-                        });
+                        client.query(
+                            "select distinct culoare from laptopuri order by culoare asc",
+                            function (err, rezCulori) {
+                                client.query(
+                                    "select distinct brand from laptopuri order by brand asc",
+                                    function (err, rezBranduri) {
+                                        client.query(
+                                            "select distinct resigilat from laptopuri order by resigilat desc",
+                                            function (err, rezResigilat) {
+                                                client.query(
+                                                    "select min(pret), max(pret) from laptopuri",
+                                                    function (err, rezPreturi) {
+                                                        client.query(
+                                                            "select distinct unnest(specificatii) specs from laptopuri order by specs asc",
+                                                            function (
+                                                                err,
+                                                                rezSpecs
+                                                            ) {
+                                                                res.render(
+                                                                    "pagini/produse",
+                                                                    {
+                                                                        produse:
+                                                                            rez.rows,
+                                                                        optiuni:
+                                                                            rezOptiuni.rows,
+                                                                        culori: rezCulori.rows,
+                                                                        branduri:
+                                                                            rezBranduri.rows,
+                                                                        resigilat:
+                                                                            rezResigilat.rows,
+                                                                        preturi:
+                                                                            rezPreturi.rows,
+                                                                        specs: rezSpecs.rows,
+                                                                    }
+                                                                );
+                                                            }
+                                                        );
+                                                    }
+                                                );
+                                            }
+                                        );
+                                    }
+                                );
+                            }
+                        );
                     }
                 }
             );
@@ -546,14 +596,30 @@ app.get("/useri", function (req, res) {
             console.log(err);
             res.render("pagini/useri", { useri: rezQuery.rows });
         });
+        // var obiectComanda2 = {
+        //     tabel: "utilizatori",
+        //     campuri: ["*"],
+        //     conditiiAnd: [
+        //         // "id = 2",
+        //         // "nume = 'Nimeni'",
+        //         // ["id = 2", "nume = 'Nimeni'"],
+        //         // ["username = 'nimeni_altu'"],
+        //     ],
+        // };
+        // AccesBD.getInstanta().select(obiectComanda2, function (err, rezQuery) {
+        //     console.log(err);
+        //     res.render("pagini/useri", { useri: rezQuery.rows });
+        // });
         Utilizator.cauta(
-            { id: "2" },
+            { id: "2", username: "nimeni_altu" },
             {},
             function (listaUtiliz, obparam, eroare) {
                 if (eroare == -1) {
                     console.log("Nu a fost gasit niciun utilizator!");
-                }
-                console.log(listaUtiliz[0].username);
+                } else
+                    console.log(
+                        "Utilizatorul cautat: " + listaUtiliz[0].username
+                    );
             }
         );
     } else {
@@ -815,20 +881,19 @@ function compileazaScss(caleScss, caleCss) {
     //TO DO
     let numeFisCss = path.basename(caleCss);
     let numeFisCssBackup = numeFisCss.split(".")[0];
-    // if (fs.existsSync(caleCss)) {
-    //     fs.copyFileSync(
-    //         caleCss,
-    //         path.join(
-    //             obGlobal.folderBackup,
-    //             "resurse/css",
-    //             numeFisCssBackup +
-    //                 "_" +
-    //                 new Date().getTime() +
-    //                 "." +
-    //                 numeFisCss.split(".")[1]
-    //         )
-    //     ); // +(new Date()).getTime()
-    // }
+    if (fs.existsSync(caleCss)) {
+        fs.copyFileSync(
+            caleCss,
+            path.join(
+                caleBackup,
+                numeFisCssBackup +
+                    "_" +
+                    new Date().getTime() +
+                    "." +
+                    numeFisCss.split(".")[1]
+            )
+        );
+    }
     rez = sass.compile(caleScss, { sourceMap: true });
     fs.writeFileSync(caleCss, rez.css);
     //console.log("Compilare SCSS",rez);
@@ -838,8 +903,52 @@ vFisiere = fs.readdirSync(obGlobal.folderScss);
 for (let numeFis of vFisiere) {
     if (path.extname(numeFis) == ".scss") {
         compileazaScss(numeFis);
+        // setInterval();
+        stergeFisiereBackup();
     }
 }
+
+function stergeFisiereBackup() {
+    let caleBackup = path.join(obGlobal.folderBackup, "resurse/css");
+    fs.readdir(caleBackup, function (err, files) {
+        if (err) {
+            console.error(
+                "Nu s-au putut sterge fisiere vechi din backup!",
+                err
+            );
+        } else {
+            files.forEach(function (file, index) {
+                var fisierDeSters = path.join(caleBackup, file);
+                fs.stat(fisierDeSters, function (error, stat) {
+                    if (error) {
+                        console.error(
+                            "Nu s-au putut citi date despre fisier!",
+                            error
+                        );
+                        return;
+                    }
+                    var numarDeMinuteTrecute =
+                        (new Date() - stat.birthtime) / (1000 * 60);
+                    if (numarDeMinuteTrecute >= 30) {
+                        fs.unlink(fisierDeSters, function (deleteError) {
+                            if (deleteError && deleteError.code == "ENOENT") {
+                                console.info("Fisierul nu exista.");
+                            } else if (deleteError) {
+                                console.error(
+                                    "O eroare a intervenit la stergerea fisierului."
+                                );
+                            } else {
+                                console.info("Fisier sters.");
+                            }
+                        });
+                    }
+                });
+            });
+        }
+    });
+}
+
+setInterval(stergeFisiereBackup, 30 * 60 * 1000);
 
 fs.watch(obGlobal.folderScss, function (eveniment, numeFis) {
     console.log(eveniment, numeFis);

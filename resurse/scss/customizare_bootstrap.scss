@@ -26,6 +26,7 @@
     $body-text-align: justify,
     $form-range-thumb-active-bg: #2b7a78,
     $form-range-thumb-width: 1.5rem,
-    $form-range-track-bg: #3aafa9
+    $form-range-track-bg: #3aafa9,
+    $modal-content-bg: var(--culoare-modal)
 );
 @import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";

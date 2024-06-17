@@ -12,13 +12,20 @@
         display: none;
     }
     #banner {
-        display: block;
+        display: block !important;
         position: absolute;
-        right: 0px;
-        top: 0px;
+        left: 50%;
+        right: 0;
+        top: 0;
         border: 5px double black;
         width: 50%;
+        height: 5%;
+        padding-top: 0.5rem;
         text-align: center;
+        opacity: 1;
+        box-shadow: none;
+        transform-origin: none;
+        animation: none;
     }
     #grid-pagina {
         display: block;
@@ -44,7 +51,7 @@
     #titlu-site {
         text-align: center;
         width: 100%;
-        margin-top: 10px;
+        margin-top: 2rem;
     }
     nav {
         --inaltime-meniu: 20px;
@@ -110,8 +117,12 @@
     #trending-now h3,
     #imagine-duotone,
     #galerie-animata,
-    #galerie-statica {
-        display: none;
+    #galerie-statica,
+    #ok_cookies,
+    #container-schimba-tema,
+    #form_inreg,
+    #useri-online {
+        display: none !important;
     }
 }
 

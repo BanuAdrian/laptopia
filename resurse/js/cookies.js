@@ -88,6 +88,8 @@ window.addEventListener("load", function () {
                 }
             };
     }
+
+    // if (document.getElementById("ckbox-filtrare").checked) filtrare();
 });
 
 window.addEventListener("DOMContentLoaded", function () {

@@ -1,8 +1,8 @@
-<section>
-    <p><b>Useri online:</b></p>
-    <ol>
-        <% for(let u of locals.useriOnline) { %>
-            <li><%- u.username %>(<%- u.prenume %> <%- u.nume %>)</li>
-        <% } %>
-    </ol>
+<section id="useri-online">
+	<h3>USERI ONLINE:</h2>
+		<ol>
+			<% for(let u of locals.useriOnline) { %>
+			<li><%- u.username %>(<%- u.prenume %> <%- u.nume %>)</li>
+			<% } %>
+		</ol>
 </section>

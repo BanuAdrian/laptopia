@@ -24,9 +24,9 @@
 				<p class="culoare"><b class="nume-caracteristica">Culoare</b>: <span class="val-culoare"><%- prod.culoare%></span></p>
 				<p class="specificatii"><b class="nume-caracteristica">Specificatii</b>: <span class="val-specificatii"><%- prod.specificatii%></span></p>
 				<p class="descriere"><b class="nume-caracteristica">Descriere</b>: <span class="val-descriere"><%- prod.descriere%></span></p>
-				<p class="resigilat"><b class="nume-caracteristica">Resigilat</b>: <span class="val-resigilat"><%- prod.resigilat%></span></p>
+				<p class="resigilat"><b class="nume-caracteristica">Resigilat</b>: <span class="val-resigilat"><%- prod.resigilat == true ? "Da" : "Nu"%></span></p>
 				<p class="garantie"><b class="nume-caracteristica">Garantie comerciala</b>: <span class="val-garantie"><%- prod.garantie_comerciala%> luni</span></p>
-				<p class="data"><b class="nume-caracteristica">Data adaugarii</b>: <time class="val-data" datetime="15-09-2018" lang="ro"><%- prod.data_adaugare%></time></p>
+				<p class="data"><b class="nume-caracteristica">Data adaugarii</b>: <time class="val-data" datetime="15-Septembrie-2018" lang="ro"><%- prod.data_adaugare.getDay()%>-<%-prod.data_adaugare.toLocaleString('ro', {month: 'long'})%>-<%-prod.data_adaugare.getFullYear()%>[<%-prod.data_adaugare.toLocaleString('ro', {weekday: 'long'})%>]</time></p>
 				<figure class="imag-produs">
 					<img src="/resurse/imagini/laptopuri/<%- locals.prod.imagine %>" alt="[imagine <%- locals.prod.nume %>]" />
 				</figure>

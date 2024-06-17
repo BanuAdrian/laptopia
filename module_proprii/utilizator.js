@@ -18,17 +18,15 @@ class Utilizator {
 
     /**
      * @typedef {object} ObiectUtilizator - un obiect ale carui proprietati au aceleasi nume cu cele ale instantelor clasei Utilizator
-     * @property {string []} campuri - o lista de stringuri cu numele coloanelor afectate de query; poate cuprinde si elementul "*"
-     * @property {string[]} conditiiAnd - lista de stringuri cu conditii pentru where
      * @property {number} id - ID-ul utilizatorului
      * @property {string} username - Username-ul utilizatorului
-     * @param {string} nume - Numele utilizatorului
-     * @param {string} prenume - Prenumele utilizatorului
-     * @param {string} email - Email-ul utilizatorului
-     * @param {string} parola - Parola utilizatorului
-     * @param {string} rol - Rolul utilizatorului
-     * @param {string} culoare_chat - Culoarea chatului utilizatorului
-     * @param {string} poza - Poza utilizatorului
+     * @property {string} nume - Numele utilizatorului
+     * @property {string} prenume - Prenumele utilizatorului
+     * @property {string} email - Email-ul utilizatorului
+     * @property {string} parola - Parola utilizatorului
+     * @property {string} rol - Rolul utilizatorului
+     * @property {string} culoare_chat - Culoarea chatului utilizatorului
+     * @property {string} poza - Poza utilizatorului
      */
     /**
      * Creeaza o instanta a clasei Utilizator
@@ -122,6 +120,65 @@ class Utilizator {
             .toString("hex");
     }
 
+    /**
+     * @typedef {object} ObiectUtilizator - un obiect ale carui proprietati au aceleasi nume cu cele ale instantelor clasei Utilizator
+     * @property {number} id - ID-ul utilizatorului
+     * @property {string} username - Username-ul utilizatorului
+     * @param {string} nume - Numele utilizatorului
+     * @param {string} prenume - Prenumele utilizatorului
+     * @param {string} email - Email-ul utilizatorului
+     * @param {string} parola - Parola utilizatorului
+     * @param {string} rol - Rolul utilizatorului
+     * @param {string} culoare_chat - Culoarea chatului utilizatorului
+     * @param {string} poza - Poza utilizatorului
+     */
+    /**
+     * Creeaza o instanta a clasei Utilizator
+     * @param {ObiectUtilizator} obj - un obiect ale carui proprietati au aceleasi nume cu cele ale instantelor clasei Utilizator
+     * @param {function} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
+     */
+    modifica(
+        {
+            id,
+            username,
+            nume,
+            prenume,
+            email,
+            parola,
+            rol,
+            culoare_chat = "black",
+            poza,
+        } = {},
+        callback
+    ) {
+        campuriUtilizator = arguments[0];
+        Utilizator.getUtilizDupaUsername(this.username, function (u, obparam) {
+            let parametriCerere = {
+                tabel: "utilizatori",
+                campuri: campuriUtilizator,
+                conditiiAnd: [`username = '${this.username}'`],
+            };
+            AccesBD.getInstanta(Utilizator.tipConexiune).update(
+                parametriCerere,
+                function (err, rezUpdate) {
+                    if (err || rezUpdate.rowCount == 0) {
+                        console.log("Cod:", err);
+                        afisareEroare(res, 3);
+                    } else {
+                        for (let proprietate in campuriUtilizator)
+                            this[proprietate] = campuriUtilizator[proprietate];
+
+                        if (this.rol)
+                            this.rol = this.rol.cod
+                                ? RolFactory.creeazaRol(this.rol.cod)
+                                : RolFactory.creeazaRol(this.rol);
+
+                        console.log("Utilizator modificat cu succes!");
+                    }
+                }
+            );
+        });
+    }
     /**
      * Salveaza utilizatorul in baza de date
      */
@@ -246,8 +303,6 @@ class Utilizator {
 
     /**
      * @typedef {object} ObiectUtilizator - un obiect ale carui proprietati au aceleasi nume cu cele ale instantelor clasei Utilizator
-     * @property {string []} campuri - o lista de stringuri cu numele coloanelor afectate de query; poate cuprinde si elementul "*"
-     * @property {string[]} conditiiAnd - lista de stringuri cu conditii pentru where
      * @property {number} id - ID-ul utilizatorului
      * @property {string} username - Username-ul utilizatorului
      * @param {string} nume - Numele utilizatorului
@@ -261,6 +316,7 @@ class Utilizator {
     /**
      * Cauta utilizatori dupa criterii specifice
      * @param {ObiectUtilizator} obj - un obiect ale carui proprietati au aceleasi nume cu cele ale instantelor clasei Utilizator
+     * @param {Object} obparam - Parametri suplimentari
      * @param {function} proceseazaUtiliz - Callback pentru procesarea utilizatorilor
      */
     static cauta(
@@ -315,22 +371,19 @@ class Utilizator {
 
     /**
      * @typedef {object} ObiectUtilizator - un obiect ale carui proprietati au aceleasi nume cu cele ale instantelor clasei Utilizator
-     * @property {string []} campuri - o lista de stringuri cu numele coloanelor afectate de query; poate cuprinde si elementul "*"
-     * @property {string[]} conditiiAnd - lista de stringuri cu conditii pentru where
      * @property {number} id - ID-ul utilizatorului
      * @property {string} username - Username-ul utilizatorului
-     * @param {string} nume - Numele utilizatorului
-     * @param {string} prenume - Prenumele utilizatorului
-     * @param {string} email - Email-ul utilizatorului
-     * @param {string} parola - Parola utilizatorului
-     * @param {string} rol - Rolul utilizatorului
-     * @param {string} culoare_chat - Culoarea chatului utilizatorului
-     * @param {string} poza - Poza utilizatorului
+     * @property {string} nume - Numele utilizatorului
+     * @property {string} prenume - Prenumele utilizatorului
+     * @property {string} email - Email-ul utilizatorului
+     * @property {string} parola - Parola utilizatorului
+     * @property {string} rol - Rolul utilizatorului
+     * @property {string} culoare_chat - Culoarea chatului utilizatorului
+     * @property {string} poza - Poza utilizatorului
      */
     /**
      * Cauta utilizatori dupa criterii specifice in mod asincron
      * @param {ObiectUtilizator} obj - un obiect ale carui proprietati au aceleasi nume cu cele ale instantelor clasei Utilizator
-     * @param {function} proceseazaUtiliz - Callback pentru procesarea utilizatorilor
      */
     static async cautaAsync({
         id,

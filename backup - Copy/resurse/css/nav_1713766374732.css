@@ -4,15 +4,16 @@ body {
   --culoare-deschisa: #3aafa9;
   --culoare-text: #17252a;
   --culoare-border: #17252a;
-  --text: #def2f1;
+  --text-selectat: #def2f1;
 }
 
 nav {
   --inaltime-meniu: 2.5em;
-  --latime-buton: 12.375rem;
+  --latime-buton: 17.75vw;
   height: var(--inaltime-meniu);
+  background-color: var(--culoare-deschisa);
   font-weight: bolder;
-  font-size: 1.1vw;
+  font-size: 1vw;
 }
 
 #hamburger,
@@ -26,22 +27,19 @@ nav {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  background-color: var(--culoare-deschisa);
 }
 .meniu ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  background-color: var(--culoare2);
+  background-color: var(--culoare-deschisa);
 }
 .meniu li {
-  position: relative;
   width: var(--latime-buton);
   height: var(--inaltime-meniu);
   text-align: center;
   box-sizing: border-box;
-}
-.meniu li:hover {
-  text-decoration: underline !important;
 }
 .meniu li div,
 .meniu li a {
@@ -53,38 +51,23 @@ nav {
   color: var(--culoare-text);
   text-decoration: none;
   box-sizing: border-box;
-  transition: all 0.2s ease-in-out;
-  font-weight: bold;
-  color: var(--text);
+  transition: all 0.4s linear;
 }
 .meniu li:hover > ul {
   display: block;
   position: absolute;
   z-index: 100;
   animation: animatie_submeniu 1s linear 1 forwards;
-  min-width: 100%;
-  width: 200%;
-  max-width: 200%;
-  text-align: center;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-  box-shadow: 10px 5px 7px var(--culoare-umbra);
-}
-.meniu li:hover #submeniu-user {
-  width: 100%;
-}
-.meniu li:hover > ul li {
-  text-align: center;
-  width: 100%;
-}
-.meniu li:hover > ul a {
-  text-shadow: none;
 }
 .meniu ul {
   display: none;
   opacity: 0;
   transform-origin: center top;
   transform: scaleY(0);
+}
+.meniu > li:hover {
+  box-shadow: 0px 0px 15px 1px var(--culoare-umbra) inset;
+  transition: box-shadow 0.5s linear;
 }
 
 @media screen and (min-width: 1200px) {
@@ -96,11 +79,7 @@ nav {
     font-size: 1rem;
     line-height: 2vw;
     transform: scaleX(0);
-  }
-}
-@media screen and (min-width: 800px) {
-  .meniu li ul li {
-    font-size: 0.9vw;
+    animation: animatie_sageata 0.6s ease-in-out 1 forwards;
   }
 }
 @keyframes animatie_sageata {

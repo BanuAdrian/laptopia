@@ -113,12 +113,24 @@ class AccesBD {
         parametriQuery = []
     ) {
         let conditieWhere = "";
-        if (conditiiAnd.length > 0)
+        let esteListaDeListe =
+            Array.isArray(conditiiAnd) &&
+            conditiiAnd.every((el) => Array.isArray(el));
+
+        if (esteListaDeListe) {
+            for (let i = 0; i < conditiiAnd.length; ++i) {
+                conditiiAnd[i] = conditiiAnd[i].join(" and ");
+            }
+            if (conditiiAnd.length > 0)
+                conditieWhere = `where ${conditiiAnd.join(" or ")}`;
+        } else if (conditiiAnd.length > 0) {
             conditieWhere = `where ${conditiiAnd.join(" and ")}`;
+        }
         let comanda = `select ${campuri.join(
             ","
         )} from ${tabel} ${conditieWhere}`;
-        console.error(comanda);
+        console.error("Comanda select este: " + comanda);
+        // console.log("Comanda select este: " + comanda);
         /*
         comanda=`select id, camp1, camp2 from tabel where camp1=$1 and camp2=$2;
         this.client.query(comanda,[val1, val2],callback)
@@ -126,7 +138,6 @@ class AccesBD {
         */
         this.client.query(comanda, parametriQuery, callback);
     }
-
     /**
      * @typedef {object} ObiectQuerySelect - obiect primit de functiile care realizeaza un query
      * @property {string} tabel - numele tabelului
@@ -141,9 +152,19 @@ class AccesBD {
      */
     async selectAsync({ tabel = "", campuri = [], conditiiAnd = [] } = {}) {
         let conditieWhere = "";
-        if (conditiiAnd.length > 0)
-            conditieWhere = `where ${conditiiAnd.join(" and ")}`;
+        let esteListaDeListe =
+            Array.isArray(conditiiAnd) &&
+            conditiiAnd.every((el) => Array.isArray(el));
 
+        if (esteListaDeListe) {
+            for (let i = 0; i < conditiiAnd.length; ++i) {
+                conditiiAnd[i] = conditiiAnd[i].join(" and ");
+            }
+            if (conditiiAnd.length > 0)
+                conditieWhere = `where ${conditiiAnd.join(" or ")}`;
+        } else if (conditiiAnd.length > 0) {
+            conditieWhere = `where ${conditiiAnd.join(" and ")}`;
+        }
         let comanda = `select ${campuri.join(
             ","
         )} from ${tabel} ${conditieWhere}`;
@@ -224,8 +245,19 @@ class AccesBD {
         for (let prop in campuri)
             campuriActualizate.push(`${prop}='${campuri[prop]}'`);
         let conditieWhere = "";
-        if (conditiiAnd.length > 0)
+        let esteListaDeListe =
+            Array.isArray(conditiiAnd) &&
+            conditiiAnd.every((el) => Array.isArray(el));
+
+        if (esteListaDeListe) {
+            for (let i = 0; i < conditiiAnd.length; ++i) {
+                conditiiAnd[i] = conditiiAnd[i].join(" and ");
+            }
+            if (conditiiAnd.length > 0)
+                conditieWhere = `where ${conditiiAnd.join(" or ")}`;
+        } else if (conditiiAnd.length > 0) {
             conditieWhere = `where ${conditiiAnd.join(" and ")}`;
+        }
         let comanda = `update ${tabel} set ${campuriActualizate.join(
             ", "
         )}  ${conditieWhere}`;
@@ -264,8 +296,19 @@ class AccesBD {
         for (let i = 0; i < campuri.length; i++)
             campuriActualizate.push(`${campuri[i]}=$${i + 1}`);
         let conditieWhere = "";
-        if (conditiiAnd.length > 0)
+        let esteListaDeListe =
+            Array.isArray(conditiiAnd) &&
+            conditiiAnd.every((el) => Array.isArray(el));
+
+        if (esteListaDeListe) {
+            for (let i = 0; i < conditiiAnd.length; ++i) {
+                conditiiAnd[i] = conditiiAnd[i].join(" and ");
+            }
+            if (conditiiAnd.length > 0)
+                conditieWhere = `where ${conditiiAnd.join(" or ")}`;
+        } else if (conditiiAnd.length > 0) {
             conditieWhere = `where ${conditiiAnd.join(" and ")}`;
+        }
         let comanda = `update ${tabel} set ${campuriActualizate.join(
             ", "
         )}  ${conditieWhere}`;
@@ -293,8 +336,19 @@ class AccesBD {
      */
     delete({ tabel = "", conditiiAnd = [] } = {}, callback) {
         let conditieWhere = "";
-        if (conditiiAnd.length > 0)
+        let esteListaDeListe =
+            Array.isArray(conditiiAnd) &&
+            conditiiAnd.every((el) => Array.isArray(el));
+
+        if (esteListaDeListe) {
+            for (let i = 0; i < conditiiAnd.length; ++i) {
+                conditiiAnd[i] = conditiiAnd[i].join(" and ");
+            }
+            if (conditiiAnd.length > 0)
+                conditieWhere = `where ${conditiiAnd.join(" or ")}`;
+        } else if (conditiiAnd.length > 0) {
             conditieWhere = `where ${conditiiAnd.join(" and ")}`;
+        }
 
         let comanda = `delete from ${tabel} ${conditieWhere}`;
         // console.log(comanda);

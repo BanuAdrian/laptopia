@@ -72,6 +72,7 @@
 /* .grid-produse .produs figure {
     text-align: center;
 }
+
 .grid-produse .produs figure img {
     border: 1px solid grey;
 }
@@ -141,4 +142,39 @@
         padding-left: 0.25rem;
         padding-right: 0.25rem;
     }
+}
+
+/* .modal-prod {
+    position: absolute;
+    border: 1px solid red;
+    width: 100px;
+    height: 100px;
+    left: 0px;
+}
+
+.modal-hidden {
+    display: none;
+} */
+
+/* CUSTOMIZARE MODAL */
+
+.modal {
+    font-size: 1rem;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+}
+
+.modal-backdrop {
+    background-color: red;
+}
+
+.modal-body figure {
+    width: 50%;
+}
+
+#msg-produse {
+    display: none;
+    color: red;
 }

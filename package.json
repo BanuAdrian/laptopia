@@ -1,36 +1,36 @@
 {
-  "dependencies": {
-    "bootstrap": "^5.3.3",
-    "bootstrap-icons": "^1.11.3",
-    "ejs": "^3.1.9",
-    "express": "^4.19.1",
-    "express-session": "^1.18.0",
-    "formidable": "^3.5.1",
-    "nodemailer": "^6.9.13",
-    "pg": "^8.11.5",
-    "puppeteer": "^22.6.2",
-    "qrcode": "^1.5.3",
-    "sass": "^1.74.1",
-    "sharp": "^0.33.3"
-  },
-  "name": "proiect-tw",
-  "version": "1.0.0",
-  "description": "magazin online de laptopuri",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BanuAdrian/proiect-tw.git"
-  },
-  "keywords": [
-    "laptopia.ro"
-  ],
-  "author": "Constantin-Adrian Banu",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/BanuAdrian/proiect-tw/issues"
-  },
-  "homepage": "https://github.com/BanuAdrian/proiect-tw#readme"
+    "dependencies": {
+        "bootstrap": "^5.3.3",
+        "bootstrap-icons": "^1.11.3",
+        "ejs": "^3.1.9",
+        "express": "^4.19.1",
+        "express-session": "^1.18.0",
+        "formidable": "^3.5.1",
+        "nodemailer": "^6.9.13",
+        "pg": "^8.11.5",
+        "puppeteer": "^22.6.2",
+        "qrcode": "^1.5.3",
+        "sass": "^1.74.1",
+        "sharp": "^0.33.3"
+    },
+    "name": "proiect-tw",
+    "version": "1.0.0",
+    "description": "magazin online de laptopuri",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/BanuAdrian/proiect-tw.git"
+    },
+    "keywords": [
+        "laptopia.ro"
+    ],
+    "author": "Constantin-Adrian Banu",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/BanuAdrian/proiect-tw/issues"
+    },
+    "homepage": "https://github.com/BanuAdrian/proiect-tw#readme"
 }
